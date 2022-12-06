@@ -1,6 +1,7 @@
 name: list_file_workflow
 on: 
-  push: [ "main" ]
+  push:
+    branches: [ "main" ]
 
 jobs: 
   List_changed_files:
