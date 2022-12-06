@@ -1,0 +1,12 @@
+name: list_file_workflow
+on: 
+  push: [ main ]
+
+jobs: 
+  List_changed_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: step_name_list_files
+        run: 
+          pwd
+          ls
