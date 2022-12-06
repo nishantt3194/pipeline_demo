@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
 
-       - name: step_name_list_files_after_checkout
-         run: 
-           pwd
-           ls -ltr
+      - name: step_name_list_files_after_checkout
+        run: 
+          pwd
+          ls -ltr
