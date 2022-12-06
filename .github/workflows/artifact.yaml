@@ -23,12 +23,12 @@ jobs:
     run-on: ubuntu_latest
     steps:
        - name: download_math_result_for_job1
-         uses: actions/download-artifact@v3
+       - uses: actions/download-artifact@v3
          with:
             name: math-artifact
 
        - shell: bash
-         run: | 
+       - run: | 
             value=`cat math.txt`
             echo `expr $value  \*  9` > math.txt
        - name: upload math result for job2
@@ -42,10 +42,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name : download math result for job2
-         uses: actions/download-artifact@v3
+       - uses: actions/download-artifact@v3
          with:
             name: math-artifact
        - shell: bash
-         run: | 
+       - run: | 
             value=`cat math.txt`
             echo the result is $value
