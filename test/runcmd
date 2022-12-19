@@ -1,0 +1,1 @@
+act repository_dispatch --artifact-server-path /tmp/artifacts --container-architecture linux/amd64 -e ./test/repository_dispatch_event.json

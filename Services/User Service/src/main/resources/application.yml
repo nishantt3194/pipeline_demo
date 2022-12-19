@@ -1,0 +1,51 @@
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: ${SERVER_PREFIX}
+
+cloud:
+  aws:
+    region:
+      static: ap-south-1
+    credentials:
+      secret-key: ${AWS_SECRET_KEY}
+      access-key: ${AWS_ACCESS_KEY}
+
+spring:
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    protocol: ${MAIL_PROTOCOL}
+    test-connection: true
+
+  rabbitmq:
+    host: ${MQ_HOST}
+    port: ${MQ_PORT}
+    username: ${MQ_ACCESS_USERNAME}
+    password: ${MQ_ACCESS_PASSWORD}
+    ssl:
+      enabled: ${MQ_SSL_ENABLED}
+    listener:
+      simple:
+        concurrency: 1
+        max-concurrency: 5
+  jmx:
+    enabled: false
+
+  main:
+    banner-mode: off
+
+  application:
+    name: user-service
+
+  data:
+    mongodb:
+      uuid-representation: standard
+      auto-index-creation: true
+      uri: ${DB_CONNECTION_STRING}
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr([%d{yy-MM-dd HH:mm:ss}]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"

@@ -1,0 +1,47 @@
+fal:
+  auth:
+    issuer: ${ISSUER_URI}
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      auto: false
+      static: ap-south-1
+    credentials:
+      access-key: ${AWS_ACCESS_KEY_ID}
+      secret-key: ${AWS_SECRET_ACCESS_KEY}
+      use-default-aws-credentials-chain: true
+
+server:
+  port: ${SERVER_PORT}
+#  error:
+#    whitelabel:
+#      enabled: false
+
+spring:
+  session:
+    store-type: none
+
+  thymeleaf:
+    cache: false
+    suffix: .html
+
+  main:
+    banner-mode: off
+    log-startup-info: false
+
+  application:
+    name: authorization-service
+
+  data:
+    mongodb:
+      uuid-representation: standard
+      auto-index-creation: true
+      uri: ${DB_CONNECTION_STRING}
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
+

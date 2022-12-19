@@ -1,0 +1,39 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" th:href="@{/images/logo.png}"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Error Occurred</title>
+</head>
+<body>
+
+<div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+    <img alt="" class="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2" src="https://play.tailwindcss.com/img/beams.jpg" width="1308"/>
+    <div class="absolute  inset-0 bg-[url(https://play.tailwindcss.com/img/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+    <div class="relative px-24 py-20 rounded-md bg-white shadow-xl ring-1 ring-gray-900/5 sm:rounded-lg">
+        <div class="flex flex-col items-center">
+            <h1 class="font-bold text-violet-500 text-9xl" th:text="${code}"></h1>
+
+            <h6 class="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
+                <span class="text-red-500">Oops!</span> <span th:text="${tag}"></span>
+            </h6>
+
+            <p class="mb-8 text-center text-gray-500 md:text-lg" th:text="${message}">
+            </p>
+
+            <a class="px-6 py-2 text-sm font-semibold text-blue-800 bg-blue-100" th:href="@{/}">Go home</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
