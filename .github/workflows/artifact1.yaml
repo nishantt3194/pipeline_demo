@@ -1,15 +1,11 @@
-name: Ci
-on: 
-    repository_dispatch:
-        types: [ build ]
-jobs: 
-    job1:
-      runs-on: ubuntu-latest
-      steps: 
-        - name: code checkout 
-          uses: actions/checkout@v3
-        - name: run linux commands
-          run: | 
-            pwd
-            ls -al
-            whoami
+name: simple shell actions manual workflow
+on:
+  repository_dispatch:
+    types: [build]
+
+jobs:
+  simple-command-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: simple command
+        run: pwd
