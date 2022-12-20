@@ -3,8 +3,7 @@ on:
   #repository_dispatch:
     #types: [build]
   push: 
-    branches: 
-      - main
+    branches: [ main ]
     paths:
       - 'Services/**'
 
