@@ -132,7 +132,7 @@ jobs:
     needs: [ code-checkout, identify-changed-services ]
     if: (github.event.client_payload.notification-service.build == 'true') || (needs.identify-cahnged-service.outputs.isNotificaitonServiceChanged == 'true') 
     steps: 
-      - names: Download notification service from artifacts
+      - name: Download notification service from artifacts
         uses: actions/download-artifact@v3
         with: 
           name: notification-service
