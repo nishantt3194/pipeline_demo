@@ -106,12 +106,10 @@ jobs:
           echo "Notification Service changed ${{ steps.notification-service-change.outputs.any_changed }}"
           echo "Credit Service changed ${{ steps.credit-service-change.outputs.any_changed }}"
 
-
     outputs: 
       isUserServiceChanged: ${{ steps.user-service-change.outputs.any_changed }}
       isNotificationServiceChanged: ${{ steps.notifiaction-service-change.outputs.any_changed }}  
       isCreditServiceChanged: ${{ steps.credit-service-change.outputs.any_changed }}
-
 
   user-service-build: 
     runs-on: ubuntu-latest
@@ -189,7 +187,6 @@ jobs:
           docker tag $NOTIFICATION_SERVICE_IMAGE_LOCAL_REPO_NAME:1.0.0 $ECR_REGISTRY/$NOTIFICATION_SERVICE_ECR_REPO_NAME
           docker push $ECR_REGISTRY/${NOTIFICATION_SERVICE_ECR_REPO_NAME}
 
-
   credit-service-build:
     runs-on: ubuntu-latest
     needs: [code-checkout, identify-changed-services]
@@ -246,7 +243,6 @@ jobs:
         env: 
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: credit-service
-        
         run: | 
           docker tag $CREDIT_SERVICE_IMAGE_LOCAL_REPO_NAME:1.0.0 $ECR_REGISTRY/$CREDIT_SERVICE_ECR_REPO_NAME
           docker push $ECR_REGISTRY/${CREDIT_SERVICE_ECR_REPO_NAME}
