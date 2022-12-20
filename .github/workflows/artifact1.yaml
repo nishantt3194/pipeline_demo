@@ -219,7 +219,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        id: gradle build image
+        id: gradle-build-image
         run: |
           chmod +x ./gradlew
           ./gradlew bootBuildImage
