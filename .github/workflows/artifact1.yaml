@@ -47,7 +47,7 @@ jobs:
         with:
           name: notifiaction-service
           if-no-files-found: error
-          path: Serices/Notification Service
+          path: Services/Notification Service
       
       - name: Artifacting Credit Service code
         uses: actions/upload-artifact@v3
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
 
-      - uses: action/checkout@v3
+      - uses: actions/checkout@v3
         with: 
           fetch-depth: 0
 
