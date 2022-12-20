@@ -139,8 +139,8 @@ jobs:
       - name: Debug step - List files and vaariables
         if: github.event.client_payload.debug == true
         run: |
-        ls -aR
-        echo ${NOTIFICATION_SERVICE_ECR_REPO_NAME}
+          ls -aR
+          echo ${NOTIFICATION_SERVICE_ECR_REPO_NAME}
 
       - name: Setup JDK 17
         uses: actions/setup-java@v3
