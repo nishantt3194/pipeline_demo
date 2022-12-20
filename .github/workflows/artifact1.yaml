@@ -1,13 +1,252 @@
-name: simple shell actions manual workflow
-on:
+name: workflow to build the docker image backend artifacts and to push to ECR
+on: 
   repository_dispatch:
-    types: [build]
+    types: [ build ]
+  push: 
+    branches: [ main ]
+  paths:
+    - 'Services/**'
 
-jobs:
-  simple-command-actions:
+env: 
+    USER_SERVICE_ECR_REPO_NAME: user-service-repo
+    USER_SERVICE_IMAGE_LOCAL_REPO_NAME: user-service
+    NOTIFICATION_SERVICE_ECR_REPO_NAME: notification-service-repo
+    NOTIFICATION_SERVICE_IMAGE_LOCAL_REPO_NAME: notification-service
+    CREDIT_SERVICE_ECR_REPO_NAME: credit-service-repo
+    CREDIT_SERVICE_IMAGE_LOCAL_REPO_NAME: credit-service
+
+jobs: 
+
+  code-checkout:
     runs-on: ubuntu-latest
     steps:
-      - name: simple command
-        run: pwd
-      #- name: checkout repo
-      - uses: actions/checkout@v3
+      - name: Debug step - Log payload
+        if: github.event.client_payload.debug == true
+        run: 'echo "payload: ${{ toJson(github.event)}}"'
+
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: Debug step - List files
+        if: github.event.client_payload.debug == true
+        run: |
+          pwd
+          ls -a
+          git branch
+      
+      - name: Artifacting User service  code
+        uses: actions/upload-artifact@v3
+        with:
+          name: user-service
+          if-no-files-found: error
+          path: Services/User Service
+
+      - name: Artifacting Notification Service code
+        uses: actions/upload-artifact@v3
+        with:
+          name: notifiaction-service
+          if-no-files-found: error
+          path: Serices/Notification Service
+      
+      - name: Artifacting Credit Service code
+        uses: actions/upload-artifact@v3
+        with:
+          name: credit-service
+          if-no-files-found: error
+          path: Services/Credit Service
+
+
+  identify-changed-services:
+    runs-on: ubuntu-latest
+    steps: 
+
+      - uses: action/checkout@v3
+        with: 
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v34 
+        with: 
+          since_last_remote_commit: 'true'
+      
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - name: If User Service code changed
+        id: user-service-change
+        uses: tj-actions/changed-files@v34
+        with:
+          since_last_remote_commit: 'true'
+          files: |
+            Services/User Serice
+
+      - name: If Notification Service code changed
+        id: notifiaction-service-change
+        uses: tj-actions/changed-files@v34
+        with: 
+          since_last_remote_commit: 'true'
+          files: |
+            Services/Notification Service
+
+      - name: If Credit Service code changed
+        id: credit-service-change
+        uses: tj-actions/changed-files@v34
+        with: 
+          since_last_remote_commit: 'true'
+          files: |
+            Services/Credit Service
+
+      - name: Log services with changes
+        run: |
+          echo "User Service changed ${{ steps.user-service-change.outputs.any_changed }}"
+          echo "Notification Service changed ${{ steps.notification-service-change.outputs.any_changed }}"
+          echo "Credit Service changed ${{ steps.credit-service-change.outputs.any_changed }}"
+
+
+    outputs: 
+      isUserServiceChanged: ${{ steps.user-service-change.outputs.any_changed }}
+      isNotificationServiceChanged: ${{ steps.notifiaction-service-change.outputs.any_changed }}  
+      isCreditServiceChanged: ${{ steps.credit-service-change.outputs.any_changed }}
+
+
+  user-service-build: 
+    runs-on: ubuntu-latest
+    needs: [ code-checkout, identify-changed-services ]
+    if: (github.event.client_payload.user-service.build == true) || (needs.identify-changed-services.outputs.isUserServiceChanged == 'true')
+    steps: 
+      - name: build and push image of user-service
+        uses:  dhruv-bansal/genericGradleBuildAndImageECRPushAction@main
+        with: 
+          artifact_name: user-service
+          ecr_repo_name: ${USER_SERVICE_ECR_REPO_NAME}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID  }}
+          aws_secret_access_key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          docker_image_build_repo_name: user-service
+          enable_debug_acions: 'true'
+
+  notification-service-build: 
+    runs-on: ubuntu-latest
+    needs: [ code-checkout, identify-changed-services ]
+    if: (github.event.client_payload.notification-service.build == 'true') || (needs.identify-cahnged-service.outputs.isNotificaitonServiceChanged == 'true') 
+    steps: 
+      - names: Download notification service from artifacts
+        uses: actions/download-artifact@v3
+        with: 
+          name: notification-service
+
+      - name: Debug step - List files and vaariables
+        if: github.event.client_payload.debug == true
+        run: |
+        ls -aR
+        echo ${NOTIFICATION_SERVICE_ECR_REPO_NAME}
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with: 
+          java-version: '17'
+          distribution: 'zulu'
+          cache: 'gradle'
+
+      - name: Validate Gradle wrapper 
+        if: github.event.client_payload.debug == true
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Execute Gradle build
+        id: gradle-build-image
+        run: |
+          chmod +x ./gradlew
+          ./gradlew bootBuildImage
+
+      - name: List Docker image
+        if: github.event.client_payload.debug == true
+        run: |
+          docker image ls
+      
+      - name: Congifure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Push Image
+        env: 
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: notifiaction-service
+
+        run: |
+          docker tag $NOTIFICATION_SERVICE_IMAGE_LOCAL_REPO_NAME:1.0.0 $ECR_REGISTRY/$NOTIFICATION_SERVICE_ECR_REPO_NAME
+          docker push $ECR_REGISTRY/${NOTIFICATION_SERVICE_ECR_REPO_NAME}
+
+
+  credit-service-build:
+    runs-on: ubuntu-latest
+    needs: [code-checkout, identify-changed-services]
+    if: (github.event.client_payload.credit-service.build == true) || (needs.identify-changed-service.outputs.isCreditServiceChanged == 'true')
+    steps:
+      - name: Download credit service from artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: credit-service
+        
+      - name: Debug step - List files and variables
+        if: github.event.client_payload.debug == true
+        run: |
+          ls -aR
+          echo ${CREDIT_SERVICE_ECR_REPO_NAME}
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with: 
+          java-version: '17'
+          distribution: 'zulu'
+          cache: 'gradle'
+
+      - name: Validate gradle wrapper
+        if: github.event.client_payload.debug == ture
+        uses:  gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Execute Gradle build
+        id: gradle build image
+        run: |
+          chmod +x ./gradlew
+          ./gradlew bootBuildImage
+
+      - name: List Docker image      
+        if: github.event.client_payload.debug == true
+        run: |
+          docker image ls
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Push Image
+        env: 
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: credit-service
+        
+        run: | 
+          docker tag $CREDIT_SERVICE_IMAGE_LOCAL_REPO_NAME:1.0.0 $ECR_REGISTRY/$CREDIT_SERVICE_ECR_REPO_NAME
+          docker push $ECR_REGISTRY/${CREDIT_SERVICE_ECR_REPO_NAME}
