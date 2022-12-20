@@ -1,11 +1,12 @@
 name: workflow to build the docker image backend artifacts and to push to ECR
 on: 
   repository_dispatch:
-    types: [ build ]
+    types: [build]
   push: 
-    branches: [ main ]
+    branches: 
+      - main
   paths:
-    - 'Services/**'
+      - 'Services/**'
 
 env: 
     USER_SERVICE_ECR_REPO_NAME: user-service-repo
