@@ -1,7 +1,7 @@
 name: workflow to build the docker image backend artifacts and to push to ECR
 on: 
-  #repository_dispatch:
-  # types: [build]
+  repository_dispatch:
+    types: [build]
   push: 
     branches: 
       - main
