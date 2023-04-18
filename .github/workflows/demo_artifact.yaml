@@ -1,0 +1,12 @@
+name: checkout using github actions
+on:
+  push:
+    branches: 
+        - 'main'
+job:
+  code-checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout 
+        uses: actions/checkout@v3
+
