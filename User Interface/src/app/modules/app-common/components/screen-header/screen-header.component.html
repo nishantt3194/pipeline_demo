@@ -1,0 +1,31 @@
+<div class="header-outer expanded p-2 mb-4 bg-white">
+    <div class="header-banner bg-primary-striped rounded-0"></div>
+    <div class="header-inner-wrapper h-100">
+        <div class="header-inner d-flex justify-content-start align-items-center">
+            <div class="header-icon-wrapper">
+                <div class="icon-positioner">
+                    <span [data-icon]="icon" class="header-icon"></span>
+                </div>
+            </div>
+
+            <div class="header-title d-flex flex-column align-items-start justify-content-center">
+                <span class="title font-weight-extra-bold">{{ title }}</span>
+                <span *ngIf="subtitle"
+                      class="subtitle font-large-1 font-weight-bolder mt-n1 ml-1 mb-3">{{ subtitle }}</span>
+            </div>
+        </div>
+        <div class="header-content">
+            <ng-content select="[content]"></ng-content>
+        </div>
+        <div class="header-bottom-bar">
+            <div class="row align-items-end px-2">
+                <div class="col-9">
+                    <ng-content select="[tab-bar]"></ng-content>
+                </div>
+                <div class="col-3">
+                    <ng-content select="[tag]"></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

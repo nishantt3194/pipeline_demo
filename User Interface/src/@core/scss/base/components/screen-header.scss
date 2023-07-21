@@ -1,0 +1,120 @@
+@import "@core/scss/base/components/variables";
+
+.header-outer.expanded {
+  height: 200px;
+
+  .header-banner {
+    height: 200px;
+  }
+
+  .header-inner-wrapper {
+
+    .header-inner {
+
+      .header-title {
+        margin-bottom: 8px;
+        .title {
+          font-size: 4.6rem;
+        }
+      }
+
+      .header-icon-wrapper {
+        bottom: -1.5rem;
+        left: -1.5rem;
+        height: 240px;
+        width: 240px;
+
+        .icon-positioner {
+          height: 240px;
+          width: 240px;
+
+          .header-icon {
+            height: 240px;
+            width: 240px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.header-outer {
+  position: sticky !important;
+  top: 0;
+  height: 140px;
+  //width: calc(100% + calc(2 * #{$content-padding}));
+  margin: calc(-1 * #{$content-padding});
+  z-index: 10;
+  transition: 0.2s;
+
+  * {
+    transition: 0.2s;
+  }
+
+  .header-banner {
+    content: '';
+    height: 140px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  .header-inner-wrapper {
+    position: relative;
+
+    .header-inner {
+      height: 100%;
+      width: 100%;
+      position: relative;
+
+      .header-title {
+        margin-left: 146px;
+        margin-bottom: 26px;
+        .title {
+          font-size: 2.6rem;
+        }
+      }
+
+      .header-icon-wrapper {
+        overflow: hidden;
+        position: absolute;
+        bottom: -1.5rem;
+        left: -1.5rem;
+        height: 240px;
+        width: 240px;
+
+        .icon-positioner {
+          position: relative;
+          height: 240px;
+          width: 240px;
+
+          .header-icon {
+            fill: rgba(255, 255, 255, 0.4);
+            display: block;
+            position: absolute;
+            height: 240px;
+            width: 240px;
+            bottom: -48px;
+            left: -64px;
+          }
+        }
+      }
+    }
+
+    .header-bottom-bar {
+      position: absolute;
+      bottom: -40px;
+      width: 100%;
+
+      .header-tab-bar {
+        height: 64px;
+      }
+    }
+  }
+}
+

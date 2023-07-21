@@ -1,0 +1,62 @@
+<div class="modal-body" ngbAutofocus tabindex="0">
+  <div class="container">
+    <div class="row mb-2">
+      <!-- <div class="col-12">
+        <span *ngIf="!isUpdate" class="font-weight-bolder">Add Pre-check</span>
+        <span *ngIf="isUpdate" class="font-weight-bolder">Edit Pre-check</span>
+      </div> -->
+      <div
+      class="col-lg-12  text-center font-large-1 font-weight-extra-bold text-primary" *ngIf="!isUpdate"
+    >
+    Add Pre-check
+    </div>
+
+    <div
+      class="col-lg-12  text-center font-large-1 font-weight-extra-bold text-primary" *ngIf="isUpdate"
+    >
+    Edit Pre-check
+    </div>
+    <hr />
+    </div>
+    <div class="mb-2">
+      <form #editForm="ngForm" id="editViewForm">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group ">
+              <label class="form-label" for="reason">Reason</label>
+              <ng-select [items]="reasonSearch" [(ngModel)]="ref.reason" placeholder="Select Reason" id="reason"
+                bindLabel="label" bindValue="identifier" name="reason">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-label" for="time">Time</label>
+              <input #author="ngModel" [(ngModel)]="ref.time" required class="form-control" id="time" name="time"
+                type="number" />
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-flat-secondary" [disabled]="submitting" aria-label="Close" type="button"
+    (click)="modal.dismiss('close')">
+    Close
+  </button>
+  <button *ngIf="!isUpdate" type="submit" form="editViewForm" (click)="save(editForm)" [disabled]="submitting || editForm.form.invalid"
+    class="btn btn-flat-primary float-right">
+    <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span>
+    <span class="ml-25 align-middle">{{
+      submitting ? "Saving..." : "Save"
+      }}</span>
+  </button>
+  <button *ngIf="isUpdate" type="submit" form="editViewForm" (click)="update(editForm)" [disabled]="submitting || editForm.form.invalid"
+    class="btn btn-flat-primary float-right">
+    <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span>
+    <span class="ml-25 align-middle">Update</span>
+  </button>
+</div>

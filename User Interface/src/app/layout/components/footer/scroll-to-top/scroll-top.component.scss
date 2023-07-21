@@ -1,0 +1,21 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 5%;
+  right: 30px;
+  z-index: 99;
+  display: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.show-scroll-to-top {
+  opacity: 1;
+  display: block;
+  transition: all 0.2s ease-in-out;
+}

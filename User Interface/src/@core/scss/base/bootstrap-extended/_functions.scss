@@ -1,0 +1,17 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}

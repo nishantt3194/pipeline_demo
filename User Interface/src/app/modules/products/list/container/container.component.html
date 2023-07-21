@@ -1,0 +1,48 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <app-screen-header [icon]="'outline_medicine_syringe'" [title]="'Products'">
+            <div class="card mb-0 shadow-primary header-tab-bar px-2" tab-bar>
+                <ul #tabBar="ngbNav" class="nav-tabs mb-0 h-100" ngbNav>
+                    <li [ngbNavItem]="'overview'">
+                        <a ngbNavLink><span [class]="'mr-1'" [data-feather]="'user'"></span>Overview</a>
+                        <ng-template ngbNavContent>
+                            <app-overview></app-overview>
+                        </ng-template>
+                    </li>
+
+                    <li [ngbNavItem]="'settings'">
+                        <a ngbNavLink><span [class]="'mr-1'" [data-feather]="'archive'"></span>Settings</a>
+                        <ng-template ngbNavContent>
+                            <app-settings></app-settings>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card mb-0 shadow-primary" tag>
+                <div class="card-body d-flex flex-column justify-content-center align-items-end">
+                    <span *ngIf="productCount < 0" class="py-2">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                    </span>
+                    <span *ngIf="productCount >= 0"
+                          class="font-weight-extra-bold font-large-3">{{ productCount }}</span>
+                </div>
+            </div>
+        </app-screen-header>
+
+        <div class="row">
+            <div class="col-12">
+                <div [ngbNavOutlet]="tabBar"></div>
+            </div>
+        </div>
+    </div>
+</div>

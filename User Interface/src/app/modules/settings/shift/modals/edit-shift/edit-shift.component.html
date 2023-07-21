@@ -1,0 +1,102 @@
+<div class="modal-body px-0">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-12 text-center font-large-1 font-weight-extra-bold text-primary"
+      >
+        Edit Shift
+      </div>
+    </div>
+    <hr />
+
+    <form id="editShiftForm" #editForm="ngForm">
+      <div class="row mb-1 px-1">
+        <div class="form-group col-md-12">
+          <label class="form-label" for="name">Shift Name</label>
+          <input
+            #name="ngModel"
+            [(ngModel)]="ref.name"
+            class="form-control"
+            id="name"
+            name="name"
+            type="text"
+            disabled
+          />
+        </div>
+        </div>
+        <div class="row mb-1 px-1">
+
+        <div class="form-group col-md-12">
+          <label class="form-label" for="area">Area</label>
+          <input
+            #name="ngModel"
+            [(ngModel)]="ref.area"
+            class="form-control"
+            id="area"
+            name="area"
+            type="text"
+            disabled
+          />
+        </div>
+        <div class="row mb-1 px-1">
+
+        <div
+          class="col-lg-12 d-flex justify-content-between align-items-center"
+        >
+          <span class="text-black-50 font-weight-extra-bold"
+            >Start Time (in 24hr format) </span
+          ><ngb-timepicker
+            [(ngModel)]="start"
+            name="start"
+            size="medium"
+            [spinners]="false"
+          ></ngb-timepicker>
+        </div>
+        </div>
+        <div class="row mb-1 px-1">
+
+        <div
+          class="col-lg-12 d-flex justify-content-between align-items-center"
+        >
+          <span class="text-black-50 font-weight-extra-bold"
+            >Stop Time (in 24hr format)</span
+          ><ngb-timepicker
+            [(ngModel)]="stop"
+            name="stop"
+            size="medium"
+            [spinners]="false"
+          ></ngb-timepicker>
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-flat-secondary"
+      [disabled]="submitting"
+      aria-label="Close"
+      type="button"
+      (click)="modal.dismiss('close')"
+    >
+      Close
+    </button>
+    <button
+      type="submit"
+      form="editViewForm"
+      (click)="save(editForm)"
+      [disabled]="submitting || editForm.form.invalid"
+      class="btn btn-flat-primary float-right"
+    >
+      <span
+        *ngIf="submitting"
+        class="spinner-border spinner-border-sm mr-1"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      <span class="ml-25 align-middle">{{
+        submitting ? "Saving..." : "Save"
+      }}</span>
+    </button>
+  </div>
+</div>

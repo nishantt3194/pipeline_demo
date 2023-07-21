@@ -1,0 +1,103 @@
+<div class="modal-body px-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center font-large-1 font-weight-extra-bold text-primary">Shift Details</div>
+        </div>
+        <hr/>
+        <ng-container *ngIf="!editing">
+            <div class="row mb-1 px-1">
+                <div class="col-lg-4">
+                    <div class="text-muted text-sm">Shift Name</div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="text-gray-600 text-sm">{{ data.name }}</div>
+                </div>
+            </div>
+            <div class="row mb-1 px-1">
+                <div class="col-lg-4">
+                    <div class="text-muted text-sm">Area</div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="text-gray-600 text-sm">{{ data.area }}</div>
+                </div>
+            </div>
+            <div class="row mb-1 px-1">
+                <div class="col-lg-4">
+                    <div class="text-muted text-sm">Start Time</div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="text-gray-600 text-sm">{{ data.startTime }}</div>
+                </div>
+            </div>
+            <div class="row mb-1 px-1">
+                <div class="col-lg-4">
+                    <div class="text-muted text-sm">Stop Time</div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="text-gray-600 text-sm">{{ data.stopTime }}</div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="editing">
+            <form #newShift="ngForm" id="newShift">
+                <div class="row mb-1 px-1">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input #name="ngModel" [(ngModel)]="payload.name" [class.is-invalid]="name.touched &amp;&amp; name.invalid" [class.is-valid]="name.touched &amp;&amp; name.valid"
+                                   class="form-control form-control-solid" id="name" name="name"
+                                   placeholder="Enter Shift Name"
+                                   required
+                                   type="text"/>
+                            <div *ngIf="name.touched &amp;&amp; name.errors &amp;&amp; name.errors.required"
+                                 class="invalid-feedback">Shift Name
+                                is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1 px-1">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input #area="ngModel" [(ngModel)]="payload.area" [disabled]="true"
+                                   class="form-control form-control-solid" id="area" name="area" required/>
+                            <div *ngIf="area.touched &amp;&amp; area.errors &amp;&amp; area.errors.required"
+                                 class="invalid-feedback">Area is
+                                required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1 px-1">
+                    <div class="col-lg-12 d-flex justify-content-between align-items-center"><span
+                            class="text-dark font-weight-extra-bold">Start Time (in 24hr format)</span>
+                        <ngb-timepicker
+                                [(ngModel)]="start" [spinners]="false" name="start" size="medium"></ngb-timepicker>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row mb-1 px-1">
+                    <div class="col-lg-12 d-flex justify-content-between align-items-center"><span
+                            class="text-dark font-weight-extra-bold">Stop Time (in 24hr format)</span>
+                        <ngb-timepicker
+                                [(ngModel)]="stop" [spinners]="false" name="stopTime" size="medium"></ngb-timepicker>
+                    </div>
+                </div>
+            </form>
+        </ng-container>
+        <div class="row mt-1">
+            <div class="col-lg-12 d-flex justify-content-end">
+                <button
+                        (click)="toggleEditing()" *ngIf="!editing"
+                        class="btn btn-sm btn-outline-warning border-0 fw-bolder">Edit
+                </button>
+                <button
+                        (click)='modal.close("cancel")'
+                        class="btn btn-sm btn-transparent-dark fw-bolder ms-2">Close
+                </button>
+                <button
+                        (click)="save()" *ngIf="editing" class="btn btn-sm btn-warning border-0 fw-bolder">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

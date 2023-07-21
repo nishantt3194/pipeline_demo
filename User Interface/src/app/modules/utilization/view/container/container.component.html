@@ -1,0 +1,99 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+  <div class="content-body">
+    <app-screen-header
+      [icon]="'outline_users_group_rounded'"
+      [title]="'Utilization'"
+    >
+    </app-screen-header>
+
+    <div class="card content-card">
+      <div class="card-body">
+        <div class="row mb-2">
+          <div class="col-3 form-group">
+            <ng-select
+              #area="ngModel"
+              [(ngModel)]="areaId"
+              [items]="areas"
+              bindLabel="label"
+              bindValue="identifier"
+              class="ng-select mb-1 w-100"
+              id="oee-area"
+              name="area"
+              placeholder="Area"
+              required
+            >
+              <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                {{ item.label }}
+              </ng-template>
+            </ng-select>
+          </div>
+          <div class="col-3 form-group">
+            <ng-select
+              #machine="ngModel"
+              [(ngModel)]="machineId"
+              [items]="machines"
+              bindLabel="label"
+              bindValue="identifier"
+              class="ng-select mb-1 w-100"
+              id="oee-machine"
+              name="machine"
+              placeholder="Machine"
+              required
+            >
+            </ng-select>
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                {{ item.label }}
+              </ng-template>
+          </div>
+          <div class="col-4 form-group">
+            <div
+              class="input-group w-100 d-flex justify-content-between align-items-center"
+            >
+              <ng2-flatpickr
+                id="schedule_range"
+                class="flex-grow-1"
+                [ngModel]="[start, end]"
+                placeholder="Select Dates"
+                #schedule_range="ngModel"
+                #picker
+                (ngModelChange)="setDates($event)"
+                [ngModelOptions]="{ standalone: true }"
+                [config]="rangeOptions"
+              ></ng2-flatpickr>
+
+              <span class="input-group-append">
+                <button
+                  class="btn btn-secondary"
+                  (click)="picker.flatpickr.toggle()"
+                >
+                  <span [data-feather]="'calendar'"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-2">
+            <button class="btn btn-secondary w-100" (click)="generate()">
+              <span [data-feather]="'search'"></span> Generate
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12" >
+            <canvas id="chart"></canvas>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

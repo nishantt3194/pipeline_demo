@@ -1,0 +1,26 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!-- Error page-->
+<div class="misc-wrapper">
+    <a class="brand-logo" href="javascript:void(0);">
+        <img alt="brand-logo" height="28" src="{{ coreConfig.app.appLogoImage }}"/>
+        <h2 class="brand-text ml-1">
+            <span class="brand-first-half text-green">{{ coreConfig.app.sAppTitleFirstHalf }}</span>
+            <span class="brand-second-half text-primary">{{ " " + coreConfig.app.sAppTitleSecondHalf }}</span>
+        </h2></a>
+    <div class="misc-inner p-2 p-sm-3">
+        <div class="w-100 text-center">
+            <h2 class="mb-1">Page Not Found 🕵🏻‍♀️</h2>
+            <p class="mb-2">Oops! The requested URL was not found on this server.</p>
+            <a class="btn btn-primary mb-2 btn-sm-block" rippleEffect routerLink="/">Back to Home</a><img [src]="
+          coreConfig.layout.skin === 'dark' ? 'assets/images/pages/error-dark.svg' : 'assets/images/pages/error.svg'
+        " alt="Error page" class="img-fluid"/>
+        </div>
+    </div>
+</div>
+<!-- / Error page-->

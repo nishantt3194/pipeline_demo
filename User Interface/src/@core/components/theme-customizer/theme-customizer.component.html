@@ -1,0 +1,161 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div [perfectScrollbar] class="customizer-content">
+  <!-- Customizer header -->
+  <div class="customizer-header px-2 pt-1 pb-0 position-relative">
+    <h4 class="mb-0">Theme Customizer</h4>
+    <p class="m-0">Customize & Preview in Real Time</p>
+
+    <a (click)="toggleSidebar('themeCustomizer')" class="customizer-close"><span [data-feather]="'x'"></span></a>
+  </div>
+
+  <hr/>
+  <form [formGroup]="form">
+    <div formGroupName="layout">
+      <!-- Styling & Text Direction -->
+      <div class="px-2" id="customizer-styling">
+        <!-- Skin -->
+        <div id="customizer-styling-skin">
+          <p class="font-weight-bold">Skin</p>
+          <div class="d-flex">
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input layout-name" formControlName="skin" id="skinlight" type="radio" value="default"/>
+              <label class="custom-control-label" for="skinlight">Light</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input layout-name" formControlName="skin" id="skinbordered" type="radio" value="bordered"/>
+              <label class="custom-control-label" for="skinbordered">Bordered</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input layout-name" formControlName="skin" id="skindark" type="radio" value="dark"/>
+              <label class="custom-control-label" for="skindark">Dark</label>
+            </div>
+            <div *ngIf="coreConfig.layout.type == 'vertical'" class="custom-control custom-radio">
+              <input class="custom-control-input layout-name" formControlName="skin" id="skinsemidark" type="radio" value="semi-dark"/>
+              <label class="custom-control-label" for="skinsemidark">Semi Dark</label>
+            </div>
+          </div>
+            <!-- Router animation -->
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <p class="font-weight-bold mr-auto m-0" for="routeSelect">Route Transition</p>
+            <select class="form-control w-50" formControlName="animation" id="routeSelect">
+              <option value="fadeInLeft">Fade In Left</option>
+              <option value="zoomIn">Zoom In</option>
+              <option value="fadeIn">Fade In</option>
+              <option value="none">None</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <!-- Menu -->
+      <div class="customizer-menu px-2">
+        <!-- Menu Layout -->
+        <div id="customizer-menu-type">
+          <p class="font-weight-bold">Menu Layout</p>
+          <div class="d-flex">
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="menu-type-vertical" type="radio" value="vertical"/>
+              <label class="custom-control-label" for="menu-type-vertical">Vertical</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="menu-type-horizontal" type="radio" value="horizontal"/>
+              <label class="custom-control-label" for="menu-type-horizontal">Horizontal</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Collapsed -->
+        <div *ngIf="coreConfig.layout.type == 'vertical'" class="d-flex mt-2" formGroupName="menu" id="customizer-menu-collapsible">
+          <p class="font-weight-bold mr-auto m-0">Menu Collapsed</p>
+          <div class="custom-control custom-control-primary custom-switch">
+            <input class="custom-control-input" formControlName="collapsed" id="collapse-sidebar-switch" type="checkbox"/>
+            <label class="custom-control-label" for="collapse-sidebar-switch"></label>
+          </div>
+        </div>
+
+        <!-- Menu Hidden -->
+        <div class="d-flex mt-2" formGroupName="menu" id="customizer-menu-hidden">
+          <p class="font-weight-bold mr-auto m-0">Menu Hidden</p>
+          <div class="custom-control custom-control-primary custom-switch">
+            <input class="custom-control-input" formControlName="hidden" id="collapse-sidebar-hidden" type="checkbox"/>
+            <label class="custom-control-label" for="collapse-sidebar-hidden"></label>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+      <!-- Navbar -->
+      <div class="px-2" formGroupName="navbar" id="customizer-navbar">
+        <!-- Navbar Color -->
+        <div *ngIf="coreConfig.layout.type == 'vertical'" id="customizer-navbar-colors">
+          <p class="font-weight-bold">Navbar Color</p>
+          <ul class="list-inline unstyled-list">
+            <li (click)="navbarColor('')" [ngClass]="{ selected: navbarColorValue === '' }" class="color-box bg-white border"></li>
+            <li (click)="navbarColor('bg-primary')" [ngClass]="{ selected: navbarColorValue === 'bg-primary' }" class="color-box bg-primary"></li>
+            <li (click)="navbarColor('bg-secondary')" [ngClass]="{ selected: navbarColorValue === 'bg-secondary' }" class="color-box bg-secondary"></li>
+            <li (click)="navbarColor('bg-success')" [ngClass]="{ selected: navbarColorValue === 'bg-success' }" class="color-box bg-success"></li>
+            <li (click)="navbarColor('bg-danger')" [ngClass]="{ selected: navbarColorValue === 'bg-danger' }" class="color-box bg-danger"></li>
+            <li (click)="navbarColor('bg-info')" [ngClass]="{ selected: navbarColorValue === 'bg-info' }" class="color-box bg-info"></li>
+            <li (click)="navbarColor('bg-warning')" [ngClass]="{ selected: navbarColorValue === 'bg-warning' }" class="color-box bg-warning"></li>
+            <li (click)="navbarColor('bg-dark')" [ngClass]="{ selected: navbarColorValue === 'bg-dark' }" class="color-box bg-dark"></li>
+          </ul>
+        </div>
+        <!-- Navbar Type -->
+        <div id="customizer-navbar-type">
+          <p *ngIf="coreConfig.layout.type == 'vertical'; else navbarTypeHorizontal" class="navbar-type-text font-weight-bold">
+            Navbar Type
+          </p>
+          <ng-template #navbarTypeHorizontal> <p class="navbar-type-text font-weight-bold">Menu Type</p> </ng-template>
+          <div class="d-flex">
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="nav-type-floating" type="radio" value="floating-nav"/>
+              <label class="custom-control-label" for="nav-type-floating">Floating</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="nav-type-sticky" type="radio" value="fixed-top"/>
+              <label class="custom-control-label" for="nav-type-sticky">Sticky</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="nav-type-static" type="radio" value="navbar-static-top"/>
+              <label class="custom-control-label" for="nav-type-static">Static</label>
+            </div>
+            <div *ngIf="coreConfig.layout.type == 'vertical'" class="custom-control custom-radio">
+              <input class="custom-control-input" formControlName="testType" id="nav-type-hidden" type="radio" value="d-none"/>
+              <label class="custom-control-label" for="nav-type-hidden">Hidden</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+
+      <!-- Footer -->
+      <div class="px-2 mb-2" formGroupName="footer" id="customizer-footer">
+        <div id="customizer-footer-type">
+          <p class="font-weight-bold">Footer Type</p>
+          <div class="d-flex">
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="footer-type-sticky" type="radio" value="footer-sticky"/>
+              <label class="custom-control-label" for="footer-type-sticky">Sticky</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="footer-type-static" type="radio" value="footer-static"/>
+              <label class="custom-control-label" for="footer-type-static">Static</label>
+            </div>
+            <div class="custom-control custom-radio mr-1">
+              <input class="custom-control-input" formControlName="testType" id="footer-type-hidden" type="radio" value="d-none"/>
+              <label class="custom-control-label" for="footer-type-hidden">Hidden</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

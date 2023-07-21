@@ -1,0 +1,34 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// ===============================================================================================
+//  File Name: colors.scss
+//  Description: Colors Page Content SCSS
+//  ----------------------------------------------------------------------------------------------
+//  Item Name: Future Algorithms
+//  Author: Future Algorithms
+//  Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+@import '../bootstrap-extended/include';
+// Bootstrap includes
+@import '../components/include'; // Components includes
+
+.colors-list {
+  li {
+    padding: 0.4rem;
+
+    i,
+    svg {
+      height: 1.2rem;
+      width: 1.2rem;
+      top: 0;
+      position: relative;
+      margin-right: 0.25rem;
+    }
+  }
+}

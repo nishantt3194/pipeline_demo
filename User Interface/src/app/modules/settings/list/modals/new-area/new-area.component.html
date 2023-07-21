@@ -1,0 +1,37 @@
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center font-large-1 font-weight-extra-bold text-black-50">New Area</div>
+        </div>
+        <hr/>
+        <form #newArea="ngForm" id="newArea">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <input #name="ngModel" [(ngModel)]="area" [class.is-invalid]="name.touched &amp;&amp; name.invalid" [class.is-valid]="name.touched &amp;&amp; name.valid"
+                               class="form-control form-control-solid" id="name" name="area"
+                               pattern="^[a-zA-Z -]+$"
+                               placeholder="Enter Area Name" required
+                               type="text"/>
+                        <div *ngIf="name.touched &amp;&amp; name.errors &amp;&amp; name.errors.required"
+                             class="invalid-feedback">Area name is
+                            required
+                        </div>
+                        <div *ngIf="name.touched &amp;&amp; name.errors &amp;&amp; name.errors.pattern"
+                             class="invalid-feedback">Enter Area Name
+                            is proper format
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button (click)='modal.close({ action: "save", identifier: area})' [disabled]="newArea.form.invalid || name.untouched"
+                            class="btn btn-primary w-100">Add Area
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

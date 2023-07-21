@@ -1,0 +1,297 @@
+<form
+  #detailsForm="ngForm"
+  id="detail-Form"
+  class="container-fluid h-100 d-flex flex-column"
+>
+  <div
+    class="col container-fluid px-5 d-flex flex-column justify-content-center"
+  >
+    <div class="row px-3">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <ng-select
+            #area="ngModel"
+            (ngModelChange)="refreshMachinesAndProducts($event)"
+            [(ngModel)]="payload.area"
+            [class.error]="
+              !area.valid && (detailsForm.submitted || area.touched)
+            "
+            [items]="metadata.areas"
+            [disabled]="!isNotEdit"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-area"
+            name="area"
+            placeholder="Area"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="(detailsForm.submitted || area.touched) && area.invalid"
+            class="invalid-form"
+          >
+            <small *ngIf="area.errors.required" class="form-text text-danger"
+              >Area is required!</small
+            >
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <ng-select
+            #machine="ngModel"
+            [(ngModel)]="payload.machine"
+            (ngModelChange)="refreshMachineSpecificDetails($event) "
+            [class.error]="
+              !machine.valid && (detailsForm.submitted || machine.touched)
+            "
+            [disabled]="metadata.machines.length < 1 || !isNotEdit"
+            [items]="metadata.machines"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-machine"
+            name="machine"
+            placeholder="Machine"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="
+              (detailsForm.submitted || machine.touched) && machine.invalid
+            "
+            class="invalid-form"
+          >
+            <small *ngIf="machine.errors.required" class="form-text text-danger"
+              >Machine is required!</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row px-3">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <ng-select
+            #date="ngModel"
+            [(ngModel)]="payload.date"
+            (ngModelChange)="onDateSelection($event) "
+
+            [class.error]="
+              !date.valid && (detailsForm.submitted || date.touched)
+            "
+            [items]="metadata.dates"
+            [disabled]="!isNotEdit"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-date"
+            name="date"
+            placeholder="Date"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="(detailsForm.submitted || date.touched) && date.invalid"
+            class="invalid-form"
+          >
+            <small *ngIf="date.errors.required" class="form-text text-danger"
+              >Shift Date is required!</small
+            >
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <ng-select
+            #shift="ngModel"
+            [(ngModel)]="payload.shift"
+            [class.error]="
+              !shift.valid && (detailsForm.submitted || shift.touched)
+            "
+            [items]="metadata.shifts"
+            [disabled]="!isNotEdit"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-shift"
+            name="shift"
+            placeholder="Shift"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="(detailsForm.submitted || shift.touched) && shift.invalid"
+            class="invalid-form"
+          >
+            <small *ngIf="shift.errors.required" class="form-text text-danger"
+              >Shift is required!</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row px-3">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <ng-select
+            #product="ngModel"
+            (ngModelChange)="refreshTemplates($event)"
+            [(ngModel)]="payload.product"
+            [class.error]="
+              !product.valid && (detailsForm.submitted || product.touched)
+            "
+            [disabled]="metadata.products.length < 1 || !isNotEdit"
+            [items]="metadata.products"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-product"
+            name="product"
+            placeholder="Product"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label + " - " + item.name }}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="
+              (detailsForm.submitted || product.touched) && product.invalid
+            "
+            class="invalid-form"
+          >
+            <small *ngIf="product.errors.required" class="form-text text-danger"
+              >Product is required!</small
+            >
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <ng-select
+            #variants="ngModel"
+            [(ngModel)]="payload.variants"
+            [class.error]="
+              !variants.valid && (detailsForm.submitted || variants.touched)
+            "
+            [disabled]="metadata.variants.length < 1 || !isNotEdit"
+            [items]="metadata.variants"
+            [multiple]="true"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-variants"
+            name="variants"
+            placeholder="Variants"
+            [required]="metadata.variants.length > 0"
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              <!-- {{ item.label + " - " + item.name }} -->
+              {{ item.label}}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="
+              (detailsForm.submitted || variants.touched) && variants.invalid
+            "
+            class="invalid-form"
+          >
+            <small
+              *ngIf="variants.errors.required"
+              class="form-text text-danger"
+              >Variants are required!</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row px-3">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <ng-select
+            #operator="ngModel"
+            [(ngModel)]="payload.operator"
+            [class.error]="
+              !operator.valid && (detailsForm.submitted || operator.touched)
+            "
+            [disabled]="metadata.operators.length < 1 || !isNotEdit"
+            [items]="metadata.operators"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select-size-xl"
+            id="oee-operator"
+            name="operator"
+            placeholder="Operator"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+          <span
+            *ngIf="
+              (detailsForm.submitted || operator.touched) && operator.invalid
+            "
+            class="invalid-form"
+          >
+            <small
+              *ngIf="operator.errors.required"
+              class="form-text text-danger"
+              >Operator is required!</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="mt-2 d-flex justify-content-between align-items-center pt-2">
+        <div class="d-flex justify-content-start align-items-center">
+          <button
+            class="btn btn-secondary"
+            rippleEffect
+            type="submit"
+            (click)="saveEntry(detailsForm)"
+            form="detail-Form"
+            *ngIf="isNotEdit"
+          >
+            <span [data-icon]="'save'" class="mr-1 font-medium-1"></span
+            ><span class="text-default">Save</span>
+          </button>
+        </div>
+        <div class="d-flex justify-content-end align-items-center">
+          <button
+            (click)="next(detailsForm)"
+            class="btn btn-secondary btn-next"
+            rippleEffect
+          >
+            <span
+              class="align-middle d-sm-inline-block d-none mr-sm-2 text-default"
+              >Next</span
+            >
+            <i
+              class="align-middle text-default"
+              data-feather="chevron-right"
+            ></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

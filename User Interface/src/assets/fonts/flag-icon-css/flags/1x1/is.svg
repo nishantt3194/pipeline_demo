@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" id="islenskifaninn" version="1" width="512" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" y="0">
+ <metadata id="metadata4595">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+  <dc:format>image/svg+xml</dc:format>
+  <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs id="defs380">
+  <clipPath clipPathUnits="userSpaceOnUse" id="clipPath5878">
+   <rect fill-opacity="0.67" height="486" id="rect5880" width="486" x="85.43" y="-.000019554"/>
+  </clipPath>
+ </defs>
+ <g clip-path="url(#clipPath5878)" fill-rule="evenodd" id="flag" stroke-width="0pt" transform="matrix(1.0535 0 0 1.0535 -90 .0000206)">
+  <rect fill="#003897" height="486" id="blarfeldur" width="675" x="0" y="0"/>
+  <path d="m0 189h189v-189h108v189h378v108h-378v189h-108v-189h-189v-108z" fill="#fff" fill-cmyk="(0 0 0 0)" id="hviturkross"/>
+  <path d="m0 216h216v-216h54v216h405v54h-405v216h-54v-216h-216v-54z" fill="#d72828" id="raudurkross"/>
+ </g>
+</svg>

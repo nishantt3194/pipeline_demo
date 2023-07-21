@@ -1,0 +1,97 @@
+<div class="modal-dialog sidebar-lg">
+    <div class="modal-content p-0">
+      <div class="modal-header mb-1 pt-1 p-0">
+        <div class="modal-title w-100 p-0">
+          <div class="row px-0 mx-0">
+            <div
+              class="col-12 mb-1 d-flex justify-content-center align-items-center font-medium-3 font-weight-bolder">
+              Pre Checks
+            </div>
+            <div class="col-12 px-0">
+              <button
+                      (click)="refresh()"
+                      class="btn btn-icon btn-secondary w-100 rounded-0"
+                      rippleEffect
+                      type="button"
+              >
+                <i class="mr-1" data-feather="refresh-cw"></i>
+                <span class="font-small-3">Refresh</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body flex-grow-1">
+        <form action="#" class="invoice-repeater px-1">
+          <div
+            class="row d-flex align-items-end border rounded-lg p-1 mb-1"
+            *ngFor="let item of prechecks; let i = index"
+            @heightIn>
+            <div class="form-group col-10">
+              <ng-select
+                [(ngModel)]="item.reason"
+                bindLabel="label"
+                bindValue="identifier"
+                class="ng-select"
+                id="reason{{ i }}"
+                name="reason{{ i }}"
+                placeholder="Reason"
+                required disabled>
+                <ng-option [value]="rea.identifier"
+                *ngFor="let rea of precheckOptions">{{ rea.label }}</ng-option>
+              </ng-select>
+            </div>
+            <div class="form-group col-2 px-1">
+              <button class="btn btn-flat-danger text-nowrap flex-grow-0 float-right"
+                      rippleEffect
+                      (click)="delete(i)">
+                <i data-feather="trash-2"></i>
+              </button>
+            </div>
+            <div class="form-group col-12">
+              <input
+                class="form-control"
+                placeholder="Time (in mins)"
+                [(ngModel)]="item.time"
+                name="time{{ i }}"
+                type="number"
+                min="0"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <button
+            (click)="submit()"
+            class="btn btn-secondary w-100 mr-1"
+            rippleEffect
+            type="submit"
+          >
+            <span class="align-middle d-sm-inline-block d-none">Save</span>
+          </button>
+          <button
+            (click)="toggleSidebar()"
+            class="btn btn-flat-secondary w-100 ml-1"
+            rippleEffect
+            type="reset"
+          >
+            <span class="align-middle d-sm-inline-block d-none">Cancel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

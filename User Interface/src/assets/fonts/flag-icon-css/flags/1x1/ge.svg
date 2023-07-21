@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" viewBox="0 0 170.66667 170.66667" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <g id="c">
+      <clipPath id="a">
+        <path d="M-109 104a104 104 0 0 0 0-208h218a104 104 0 0 0 0 208z"/>
+      </clipPath>
+      <path clip-path="url(#a)" d="M-55 74a55 55 0 0 1 110 0V-74a55 55 0 0 1-110 0z" id="b"/>
+      <use height="200" transform="rotate(90)" width="300" xlink:href="#b"/>
+    </g>
+  </defs>
+  <path d="M0 0h170.67v170.67H0z" fill="#fff"/>
+  <g transform="matrix(.535 0 0 .535 5.108 47.576)">
+    <path d="M0-29.333h300v200H0z" fill="#fff"/>
+    <path d="M130-29.333v80H0v40h130v80h40v-80h130v-40H170v-80h-40z" fill="red"/>
+    <use fill="red" height="200" transform="translate(64.45 10.117)" width="300" xlink:href="#c"/>
+    <use fill="red" height="200" transform="translate(235.55 131.22)" width="300" xlink:href="#c"/>
+    <use fill="red" height="200" transform="translate(235.55 10.117)" width="300" xlink:href="#c"/>
+    <use fill="red" height="200" transform="translate(64.45 131.22)" width="300" xlink:href="#c"/>
+  </g>
+</svg>

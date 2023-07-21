@@ -1,0 +1,99 @@
+<div class="modal-body">
+  <div class="container">
+    <div class="row mb-2" >
+      <div
+        class="col-lg-12 text-center font-large-1 font-weight-extra-bold text-black-50"
+      >
+        Assign Machine
+      </div>
+    </div>
+   
+    <div class="row">
+      <form
+        #assignForm="ngForm"
+        id="detail-Form"
+        class="container-fluid h-100 d-flex flex-column"
+      >
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="form-group">
+              <label for="user">Users</label>
+              <ng-select
+                [items]="users"
+                bindLabel="label"
+                bindValue="identifier"
+                id="user"
+                [(ngModel)]="userRef"
+                #usersRef="ngModel"
+                name="user"
+                placeholder="Select User"
+                required
+                [multiple]="true"
+              >
+                <!-- <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                {{ item.label }}
+              </ng-template> -->
+
+                <ng-template let-clear="clear" let-item="item" ng-label-tmp>
+                  <span class="ng-value-label"> {{ item.label }}</span>
+                  <span
+                    (click)="clear(item)"
+                    aria-hidden="true"
+                    class="ng-value-icon right"
+                    >×</span
+                  >
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="form-group">
+              <label for="machine">Machines</label>
+              <ng-select
+                [items]="machines"
+                bindLabel="label"
+                bindValue="identifier"
+                id="machine"
+                [(ngModel)]="machineRef"
+                #machinesRef="ngModel"
+                name="machine"
+                placeholder="Select Machine"
+                required
+                [multiple]="true"
+              >
+                <!-- <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                  {{ item.label }}
+                </ng-template> -->
+
+                <ng-template let-clear="clear" let-item="item" ng-label-tmp>
+                  <span class="ng-value-label"> {{ item.label }}</span>
+                  <span
+                    (click)="clear(item)"
+                    aria-hidden="true"
+                    class="ng-value-icon right"
+                    >×</span
+                  >
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+   
+    (click)="save()"
+    class="btn btn-flat-primary"
+    rippleEffect
+    type="submit"
+    form="assign-form"
+  >
+    Assign
+  </button>
+ 
+</div>

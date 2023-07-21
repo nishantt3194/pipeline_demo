@@ -1,0 +1,342 @@
+<div class="container-fluid p-0">
+  <div class="collapsible-cards mb-2">
+    <ngb-accordion #acc="ngbAccordion" activeIds="">
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span class="lead collapse-title text-lg text-primary fw-bolder">
+            BOS Chart
+          </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div
+            class="col-lg-12 d-flex justify-content-between align-items-center"
+          >
+            <div class="col-3 form-group">
+              <div
+                class="input-group w-100 d-flex justify-content-between align-items-center"
+              >
+                <ng2-flatpickr
+                  id="schedule_range"
+                  class="flex-grow-1"
+                  [ngModel]="[start, end]"
+                  placeholder="Select Dates"
+                  #schedule_range="ngModel"
+                  #picker
+                  (ngModelChange)="setDates($event, 0)"
+                  (change)="fetchBOSData()"
+                  [ngModelOptions]="{ standalone: true }"
+                  [config]="rangeOptions"
+                ></ng2-flatpickr>
+
+                <span class="input-group-append">
+                  <button
+                    class="btn btn-secondary"
+                    (click)="picker.flatpickr.toggle()"
+                  >
+                    <span [data-feather]="'calendar'"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button
+                (click)="exportBOS()"
+                class="btn btn-icon btn-light btn-flat-primary rounded"
+              >
+                <span
+                  [data-icon]="'outline_arrow_download'"
+                  class="font-small-5"
+                ></span>
+              </button>
+            </div>
+          </div>
+          <div style="width: 100%">
+            <canvas #bos="" height="400" id="bos" width="900"></canvas>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span class="lead collapse-title text-lg text-primary fw-bolder">
+            Downtime Pareto Chart
+          </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div
+            class="col-lg-12 d-flex justify-content-between align-items-center"
+          >
+            <div class="col-3 form-group">
+              <div
+                class="input-group w-100 d-flex justify-content-between align-items-center"
+              >
+                <ng2-flatpickr
+                  id="schedule_range"
+                  class="flex-grow-1"
+                  [ngModel]="[start, end]"
+                  placeholder="Select Dates"
+                  #schedule_range="ngModel"
+                  #picker
+                  (ngModelChange)="setDates($event, 1)"
+                  (change)="fetchParetoData()"
+                  [ngModelOptions]="{ standalone: true }"
+                  [config]="rangeOptions"
+                ></ng2-flatpickr>
+
+                <span class="input-group-append">
+                  <button
+                    class="btn btn-secondary"
+                    (click)="picker.flatpickr.toggle()"
+                  >
+                    <span [data-feather]="'calendar'"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button
+                (click)="exportPareto()"
+                class="btn btn-icon btn-light btn-flat-primary rounded"
+              >
+                <span
+                  [data-icon]="'outline_arrow_download'"
+                  class="font-small-5"
+                ></span>
+              </button>
+            </div>
+          </div>
+         
+
+          <div class="row" id="paretoData">
+            <div class="col-lg-12">
+
+              <div *ngIf="paretoData != null" class="row mb-3">
+                <div class="col-lg-12 d-flex align-items-center">
+                  <div class="rounded bg-light text-primary fw-bolder px-4 py-3">
+                    Total Shifts {{ paretoData.shifts }}
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-lg-12">
+                  <div style="width: 100%">
+                    <canvas
+                      #pareto=""
+                      height="400"
+                      id="pareto"
+                      width="900"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12" style="overflow-x: hidden">
+                  <table
+                    *ngIf="(paretoTableData | async) != null"
+                    class="table table-bordered"
+                  >
+                    <tr>
+                      <td class="text-sm fw-bold px-3 px-2">Downtime (in mins)</td>
+                      <ng-container
+                        *ngFor="let val of (paretoTableData | async)?.downtime"
+                      >
+                        <td class="text-sm px-3 px-2">{{ val }}</td>
+                      </ng-container>
+                    </tr>
+                    <tr>
+                      <td class="text-sm fw-bold px-3 px-2">Percentage</td>
+                      <ng-container
+                        *ngFor="let val of (paretoTableData | async)?.percentage"
+                      >
+                        <td class="text-sm px-3 px-2">{{ val }}</td>
+                      </ng-container>
+                    </tr>
+                    <tr>
+                      <td class="text-sm fw-bold px-3 px-2">Cumm %</td>
+                      <ng-container
+                        *ngFor="
+                          let val of (paretoTableData | async)?.cumulativePercentage
+                        "
+                      >
+                        <td class="text-sm px-3 px-2">{{ val }}</td>
+                      </ng-container>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+         
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span class="lead collapse-title text-lg text-primary fw-bolder">
+            OEE BOS CHART
+          </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div
+            class="col-lg-12 d-flex justify-content-between align-items-center"
+          >
+            <div class="col-3 form-group">
+              <div
+                class="input-group w-100 d-flex justify-content-between align-items-center"
+              >
+                <ng2-flatpickr
+                  id="schedule_range"
+                  class="flex-grow-1"
+                  [ngModel]="[start, end]"
+                  placeholder="Select Dates"
+                  #schedule_range="ngModel"
+                  #picker
+                  (ngModelChange)="setDates($event, 2)"
+                  (change)="fetchOeeData()"
+                  [ngModelOptions]="{ standalone: true }"
+                  [config]="rangeOptions"
+                ></ng2-flatpickr>
+
+                <span class="input-group-append">
+                  <button
+                    class="btn btn-secondary"
+                    (click)="picker.flatpickr.toggle()"
+                  >
+                    <span [data-feather]="'calendar'"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button
+                (click)="exportOEE()"
+                class="btn btn-icon btn-light btn-flat-primary rounded"
+              >
+                <span
+                  [data-icon]="'outline_arrow_download'"
+                  class="font-small-5"
+                ></span>
+              </button>
+            </div>
+          </div>
+          <div style="width: 100%">
+            <canvas #oee="" height="400" id="bos" width="900"></canvas>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel>
+        <ng-template ngbPanelTitle>
+          <span class="lead collapse-title text-lg text-primary fw-bolder">
+            OEE Pareto Chart
+          </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div
+            class="col-lg-12 d-flex justify-content-between align-items-center"
+          >
+            <div class="col-3 form-group">
+              <div
+                class="input-group w-100 d-flex justify-content-between align-items-center"
+              >
+                <ng2-flatpickr
+                  id="schedule_range"
+                  class="flex-grow-1"
+                  [ngModel]="[start, end]"
+                  placeholder="Select Dates"
+                  #schedule_range="ngModel"
+                  #picker
+                  (ngModelChange)="setDates($event, 3)"
+                  (change)="fetchOeeParetoData()"
+                  [ngModelOptions]="{ standalone: true }"
+                  [config]="rangeOptions"
+                ></ng2-flatpickr>
+
+                <span class="input-group-append">
+                  <button
+                    class="btn btn-secondary"
+                    (click)="picker.flatpickr.toggle()"
+                  >
+                    <span [data-feather]="'calendar'"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <button
+                (click)="exportOEEPareto()"
+                class="btn btn-icon btn-light btn-flat-primary rounded"
+              >
+                <span
+                  [data-icon]="'outline_arrow_download'"
+                  class="font-small-5"
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="row" id="oeeParetoData">
+            <div class="col-lg-12">
+
+              <div *ngIf="oeeparetoData != null" class="row mb-3">
+                <div class="col-lg-12 d-flex align-items-center">
+                  <div class="rounded bg-light text-primary fw-bolder px-4 py-3">
+                    Total Shifts {{ oeeparetoData.shifts }}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div style="width: 100%">
+                    <canvas
+                      #oeepareto=""
+                      height="400"
+                      id="pareto"
+                      width="900"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12" style="overflow-x: hidden">
+                  <table
+                    *ngIf="(oeeParetoTableData | async) != null"
+                    class="table table-bordered"
+                  >
+                    <tr>
+                      <td class="text-sm fw-bold px-3 px-2">Downtime (in mins)</td>
+                      <ng-container
+                        *ngFor="let val of (oeeParetoTableData | async)?.downtime"
+                      >
+                        <td class="text-sm px-3 px-2">{{ val }}</td>
+                      </ng-container>
+                    </tr>
+                    <tr>
+                      <td class="text-sm fw-bold px-3 px-2">Percentage</td>
+                      <ng-container
+                        *ngFor="let val of (oeeParetoTableData | async)?.percentage"
+                      >
+                        <td class="text-sm px-3 px-2">{{ val }}</td>
+                      </ng-container>
+                    </tr>
+                    <tr>
+                      <td class="text-sm fw-bold px-3 px-2">Cumm %</td>
+                      <ng-container
+                        *ngFor="
+                          let val of (oeeParetoTableData | async)?.cumulativePercentage
+                        "
+                      >
+                        <td class="text-sm px-3 px-2">{{ val }}</td>
+                      </ng-container>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+</div>

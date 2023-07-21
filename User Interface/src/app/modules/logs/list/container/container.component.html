@@ -1,0 +1,94 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <app-screen-header [icon]="'outline_notes_documents'" [title]="'Activity'">
+            <div class="card mb-0 shadow-primary header-tab-bar px-2" tab-bar>
+                <ul #tabBar="ngbNav" class="nav-tabs mb-0 h-100" ngbNav>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                      <span
+                              [data-icon]="'outline_essential_check_square'"
+                              class="font-small-2"
+                      ></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1"
+                            >Shifts</span
+                            ></a
+                        >
+                        <ng-template ngbNavContent>
+                            <app-shift-logs></app-shift-logs>
+                        </ng-template>
+                    </li>
+
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                      <span
+                              [data-icon]="'outline_essential_danger_square'"
+                              class="font-small-2"
+                      ></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1"
+                            >Machines</span
+                            ></a
+                        >
+                        <ng-template ngbNavContent>
+                            <app-machine-logs></app-machine-logs>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                      <span
+                              [data-icon]="'outline_essential_danger_square'"
+                              class="font-small-2"
+                      ></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1"
+                            >Users</span
+                            ></a
+                        >
+                        <ng-template ngbNavContent>
+                            <app-user-logs></app-user-logs>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                      <span
+                              [data-icon]="'outline_essential_danger_square'"
+                              class="font-small-2"
+                      ></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1"
+                            >Access</span
+                            ></a
+                        >
+                        <ng-template ngbNavContent>
+                            <app-access-logs></app-access-logs>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                      <span
+                              [data-icon]="'outline_essential_danger_square'"
+                              class="font-small-2"
+                      ></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1"
+                            >Entry</span
+                            ></a
+                        >
+                        <ng-template ngbNavContent>
+                            <app-entry-logs></app-entry-logs>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+        </app-screen-header>
+
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div [ngbNavOutlet]="tabBar"></div>
+            </div>
+        </div>
+    </div>
+</div>

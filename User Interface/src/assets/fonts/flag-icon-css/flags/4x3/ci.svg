@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg fill="#28ff09" fill-opacity="14.118" height="480" width="640" xmlns="http://www.w3.org/2000/svg">
+  <g fill-opacity="1" fill-rule="evenodd">
+    <path d="M426.83 0H640v480H426.83z" fill="#00cd00"/>
+    <path d="M0 0h212.88v480H0z" fill="#ff9a00"/>
+    <path d="M212.88 0h213.95v480H212.88z" fill="#fff"/>
+  </g>
+</svg>

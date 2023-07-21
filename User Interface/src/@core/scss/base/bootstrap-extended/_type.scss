@@ -1,0 +1,31 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// ================================================================================================
+//     File Name: testType.scss
+//     Description: Type pages custom scss
+//     ----------------------------------------------------------------------------------------------
+//     Item Name: Future Algorithms
+//     Author: Future Algorithms
+//     Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+// text heading color
+.text-body-heading {
+  color: $headings-color;
+
+  &:hover {
+    color: inherit !important;
+  }
+}
+
+// text body hover color if have link
+.text-body {
+  &[href]:hover {
+    color: $link-hover-color !important;
+  }
+}

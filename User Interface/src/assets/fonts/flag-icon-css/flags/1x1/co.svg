@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" version="1" width="512" xmlns="http://www.w3.org/2000/svg">
+  <g fill-rule="evenodd" stroke-width="1pt">
+    <path d="M0 0h512.005v512H0z" fill="#ffe800"/>
+    <path d="M0 256h512.005v256H0z" fill="#00148e"/>
+    <path d="M0 384.003h512.005V512H0z" fill="#da0010"/>
+  </g>
+</svg>

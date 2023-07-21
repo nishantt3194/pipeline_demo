@@ -1,0 +1,12 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<ng-container *ngIf="!item.hidden">
+  <span [translate]="item.translate" class="navigation-section-text">{{ item.title }}</span>
+    <!-- More icon in collapsed menu -->
+  <span [data-feather]="'more-horizontal'"></span>
+</ng-container>

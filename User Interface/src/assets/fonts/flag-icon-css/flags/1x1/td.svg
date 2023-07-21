@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+
+<svg height="512" id="canada" inkscape:version="0.48.4 r9939" sodipodi:docname="td.svg" version="1.1" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd">
+  <defs id="defs10"/>
+  <sodipodi:namedview bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview8" inkscape:current-layer="canada" inkscape:cx="320" inkscape:cy="240"
+                      inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="776" inkscape:window-maximized="1" inkscape:window-width="1215" inkscape:window-x="65" inkscape:window-y="24" inkscape:zoom="0.49166667"
+                      objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
+  <metadata id="metadata3698">
+  <rdf:RDF>
+    <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    </cc:Work>
+  </rdf:RDF>
+  </metadata>
+  <g id="flag" style="fill-rule:evenodd" transform="scale(0.8,1.0666667)">
+  <rect height="480" id="rect555" style="fill:#000067" width="213.97" x="0" y="0"/>
+  <rect height="480" id="rect557" style="fill:#ff0000" width="213.97" x="426.03" y="0"/>
+  <rect height="480" id="rect556" style="fill:#ffff00" width="212.06" x="213.97" y="0"/>
+  </g>
+</svg>

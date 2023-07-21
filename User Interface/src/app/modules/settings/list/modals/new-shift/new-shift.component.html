@@ -1,0 +1,63 @@
+<div class="modal-body px-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center font-large-1 font-weight-extra-bold text-black-50">New Shift</div>
+        </div>
+        <hr/>
+        <form #newShift="ngForm" id="newShift">
+            <div class="row mb-1 px-1">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <input #name="ngModel" [(ngModel)]="payload.name" [class.is-invalid]="name.touched &amp;&amp; name.invalid"
+                               [class.is-valid]="name.touched &amp;&amp; name.valid" class="form-control form-control-solid" id="name" name="name"
+                               placeholder="Enter Shift Name"
+                               required
+                               type="text"/>
+                        <div *ngIf="name.touched &amp;&amp; name.errors &amp;&amp; name.errors.required"
+                             class="invalid-feedback">Shift Name is
+                            required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1 px-1">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <select #area="ngModel" [(ngModel)]="payload.area" class="form-control form-control-solid" id="area"
+                                name="area" required>
+                            <option [defaultSelected]="true" disabled value="">Select Area</option>
+                            <ng-container *ngFor="let ar of areas">
+                                <option>{{ ar }}</option>
+                            </ng-container>
+                        </select>
+                        <div *ngIf="area.touched &amp;&amp; area.errors &amp;&amp; area.errors.required"
+                             class="invalid-feedback">Area is
+                            required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1 px-1">
+                <div class="col-lg-12 d-flex justify-content-between align-items-center"><span
+                        class="text-black-50 font-weight-extra-bold">Start Time (in 24hr format)</span>
+                    <ngb-timepicker [(ngModel)]="start" [spinners]="false" name="start" size="medium"></ngb-timepicker>
+                </div>
+            </div>
+            <hr/>
+            <div class="row mb-1 px-1">
+                <div class="col-lg-12 d-flex justify-content-between align-items-center"><span
+                        class="text-black-50 font-weight-extra-bold">Stop Time (in 24hr format)</span>
+                    <ngb-timepicker [(ngModel)]="stop" [spinners]="false" name="stop" size="medium"></ngb-timepicker>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button (click)="close()" [disabled]="newShift.form.invalid || name.untouched"
+                            class="btn btn-primary w-100">Add Shift
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

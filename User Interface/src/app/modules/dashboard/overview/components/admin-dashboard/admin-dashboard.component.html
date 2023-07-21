@@ -1,0 +1,209 @@
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <div class="row">
+            <div class="col-lg-4 col-md-3">
+                <span class="font-large-4 font-weight-extra-bold text-center text-bold">Hi</span>
+                <span class="font-medium-5 font-weight-extra-bold ml-1 mb-2">Dave,</span>
+            </div>
+            <div class="col-lg-8 col-md-3">
+                <div class="col-12 d-flex justify-content-end float-right">
+                    <div class="font-large-2 font-weight-extra-bold text-center text-bold mt-3">
+                        DRIVING OEE WITH PURPOSE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-3">
+                <span class="font-weight-extra-bold text-info font-medium-4 ml-1 mt-2 mb-2">Best Performing
+                    Machine</span>
+                <span class="font-weight-extra-bold text-info font-medium-2 mb-2">(Shift A-20-4-2023)</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-3">
+                <div class="font-large-3 font-weight-bold text-center text-bold ml-2">VA_44</div>
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <div class="text-white-75 fw-bold mt-2">PRODUCTION</div>
+                <div class="font-medium-5 font-weight-extra-bold text-primary ml-1">96000</div>
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <div class="text-white-75 fw-bold mt-2">REJECTION</div>
+                <div class="text-danger font-medium-5 font-weight-extra-bold">9234</div>
+            </div>
+            <div class="col-lg-2">
+                <div id="chart" class="font-large-4 font-weight-extra-bold  text-bold  mt-4 ml-1">
+                    <apx-chart [series]="oeeChart.series" [chart]="oeeChart.chart"
+                        [plotOptions]="oeeChart.plotOptions"></apx-chart>
+                </div>
+                <div class="font-medium-1 font-weight-extra-bold ml-5">OEE</div>
+            </div>
+            <div class="col-lg-2">
+                <div id="chart2" class="font-large-4 font-weight-extra-bold  text-bold mt-4 ml-1">
+                    <apx-chart [series]="utilizationChart.series" [chart]="utilizationChart.chart"
+                        [plotOptions]="utilizationChart.plotOptions"></apx-chart>
+                </div>
+                <div class="font-medium-1 font-weight-extra-bold ml-5">UTILIZATION</div>
+            </div>
+            <div class="col-lg-2">
+                <div id="chart3" class="font-large-4 font-weight-extra-bold  text-bold mt-4  ml-1">
+                    <apx-chart [series]="rejectionChart.series" [chart]="rejectionChart.chart"
+                        [plotOptions]="rejectionChart.plotOptions" [fill]="rejectionChart.fill"></apx-chart>
+                </div>
+                <div class="font-medium-1 font-weight-extra-bold ml-5">REJECTION</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3">
+                <div class="text-white-75 fw-bold  ml-2">AREA</div>
+                <div class="font-medium-5 font-weight-extra-bold ml-2 mb-2">IVC Assembly</div>
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <div class="text-white-75 fw-bold ">OPERATING TIME</div>
+                <div class="font-medium-5 font-weight-extra-bold text-primary mb-2">469.97 min</div>
+            </div>
+            <div class="col-lg-2 col-md-3">
+                <div class="text-white-75 fw-bold ">DOWN TIME</div>
+                <div class="font-medium-5 font-weight-extra-bold text-danger mb-2">40 mins</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-10 col-md-3">
+        <div class="font-medium-5 font-weight-bolder ml-1 mb-1">RECENT ENTRIES</div>
+    </div>
+    <div class="col-lg-2 d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary mb-2" click="Add New Entry()">Add New Entry</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-3">
+        <div class="card">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <div class="text-white-75 fw-bold ">SHIFT A</div>
+                <mark class="font-weight-bolder font-medium-2 text-primary mr-2">STAGED</mark>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="text-white-75 fw-bold ml-1">AREA</div>
+                    <div class="text-white-75 fw-bold mr-2">MACHINE</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-1 d-flex justify-content-between align-items-center">
+                    <div class="text-white-75 font-weight-bolder font-medium-4 ml-1">IVC Assembly</div>
+                    <div class="text-white-75 font-weight-bolder font-medium-4 mr-2">VA-44</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-3">
+        <div class="card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-white-75 fw-bold ml-1">SHIFT A</div>
+                <mark class="font-weight-bolder font-medium-2 text-primary mr-2">SUBMITTED</mark>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="text-white-75 fw-bold ml-1">AREA</div>
+                    <div class="text-white-75 fw-bold mr-2">MACHINE</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-1 d-flex justify-content-between align-items-center">
+                    <div class="text-white-75 font-weight-bolder font-medium-4 ml-1">IVC Assembly</div>
+                    <div class="text-white-75 font-weight-bolder font-medium-4 mr-2">VA-33</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-3">
+        <div class="card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-white-75 fw-bold ml-1">SHIFT A</div>
+                <mark class="font-weight-bolder font-medium-2 text-primary mr-2">SUBMITTED</mark>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="text-white-75 fw-bold ml-1">AREA</div>
+                    <div class="text-white-75 fw-bold mr-2">MACHINE</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-1 d-flex justify-content-between align-items-center">
+                    <div class="text-white-75 font-weight-bolder font-medium-4 ml-1">IVC Assembly</div>
+                    <div class="text-white-75 font-weight-bolder font-medium-4 mr-2">RA-92</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-3">
+        <div class="font-medium-5 font-weight-bolder ml-1 mb-1">WEEKLY OVERVIEW</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-5 col-md-3">
+        <div class="card">
+            <!-- <div class="text-white-75 fw-bold mt-1 mb-1 ml-1">IVC MOLDING</div> -->
+            <select class="form-control" id="area" required name="area">
+                <option value="" disabled [defaultSelected]="true">
+                    IVC MOLDINGs
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-3">
+        <div class="card">
+            <!-- <div class="text-white-75 fw-bold mt-1 mb-1 ml-1">VA-44</div> -->
+            <select class="form-control" id="area" required name="area">
+                <option value="" disabled [defaultSelected]="true">
+                    VA-44
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <div class="col-lg-2 d-flex justify-content-between align-items-center">
+            <button class="btn btn-primary" click="Add New Entry()">Generate</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-3">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-4 col-md-3">
+                    <div class="font-large-4 font-weight-extra-bold ml-1 text-bold text-primary">96000</div>
+                    <div class="font-medium-1 font-weight-extra-bold ml-3">PRODUCTION</div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="font-large-4 font-weight-extra-bold  text-bold text-danger ml-1">9234</div>
+                    <div class="font-medium-1 font-weight-extra-bold ml-3">REJECTION</div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div id="chart" class="font-large-4 font-weight-extra-bold  text-bold  ml-1">
+                        <apx-chart [series]="oeeWeeklyChart.series" [chart]="oeeWeeklyChart.chart"
+                            [plotOptions]="oeeWeeklyChart.plotOptions" [labels]="oeeWeeklyChart.labels"
+                            [fill]="oeeWeeklyChart.fill"></apx-chart>
+                    </div>
+                    <div class="font-medium-1 font-weight-extra-bold ml-5">OEE</div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div id="chart" class="font-large-4 font-weight-extra-bold  text-bold  ml-1">
+                        <apx-chart [series]="oeeChart.series" [chart]="oeeChart.chart"
+                            [plotOptions]="oeeChart.plotOptions"></apx-chart>
+                    </div>
+                    <div class="font-medium-1 font-weight-extra-bold ml-5">Utilization</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

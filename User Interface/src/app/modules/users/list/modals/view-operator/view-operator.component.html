@@ -1,0 +1,269 @@
+<div class="modal-body o-visible position-relative mt-md-n3 rounded-1">
+  <div class="container p-0">
+    <div class="row">
+      <div
+        class="col-lg-12 text-center d-flex justify-content-center align-items-center"
+      >
+        <img
+          alt=""
+          class="img-account-profile mb-2 rounded-circle mt-md-n5"
+          height="160px"
+          src="../../../../../../assets/images/illustration/user.png"
+          width="160px"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div
+          class="text-xl text-center text-black-50 font-large-2 font-weight-extra-bold"
+        >
+          {{ ref.firstName }} {{ ref.lastName }}
+        </div>
+        <input autofocus hidden />
+      </div>
+    </div>
+    <hr *ngIf="!showAssign" />
+    <ng-container>
+      <div class="row mb-2 px-2">
+        <div
+          class="col-md-7 border border-top-0 border-left-0 border-bottom-0 border-black-50"
+          *ngIf="!showAssign"
+        >
+          <div class="row mb-1">
+            <div class="col-lg-12">
+              <div class="text-muted text-sm">Email</div>
+            </div>
+            <div class="col-lg-12">
+              <div class="text-dark text-sm">{{ ref.email }}</div>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-lg-12">
+              <div class="text-muted text-sm">Role</div>
+            </div>
+            <div class="col-lg-12">
+              <div class="text-dark text-sm">{{ ref.role | titlecase }}</div>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-lg-12">
+              <div class="text-muted text-sm">Status</div>
+            </div>
+            <div class="col-lg-12">
+              <div
+                class="text-sm text-success font-weight-extra-bold"
+                *ngIf="ref.status"
+              >
+                Active
+              </div>
+              <div
+                class="text-sm text-danger font-weight-extra-bold"
+                *ngIf="!ref.status"
+              >
+                Inactive
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-lg-12">
+              <div class="text-muted text-sm">Assigned</div>
+            </div>
+            <div class="col-lg-12">
+              <div class="text-sm text-success fw-bolder" *ngIf="ref.assigned">
+                Yes
+              </div>
+              <div class="text-sm text-danger fw-bolder" *ngIf="!ref.assigned">
+                No
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="{ 'col-lg-5': !showAssign, 'col-lg-12': showAssign }">
+          <div class="row px-3 mb-2" *ngIf="!showAssign">
+            <div
+              class="col-lg-12 text-black-50 text-lg font-weight-extra-bold mb-1"
+            >
+              Machines
+            </div>
+          </div>
+          <div class="row px-3 mb-2">
+            <ng-container *ngIf="!showAssign && !showUnmap"
+              ><div class="col-lg-12" *ngIf="ref.machines.length === 0">
+                <div class="text-sm text-gray-600">None Assigned</div>
+              </div>
+              <div class="col-lg-12" *ngIf="ref.machines.length &lt;= 5">
+                <ng-container *ngFor="let mc of ref.machines; last as isLast"
+                  ><div class="text-sm text-muted fw-bolder mb-2">
+                    {{ mc }}
+                  </div></ng-container
+                >
+              </div>
+              <div class="col-lg-12" *ngIf="ref.machines.length &gt; 5">
+                <div class="row" style="max-height: 400px; overflow-y: auto">
+                  <ng-container *ngFor="let mc of ref.machines; last as isLast"
+                    ><div
+                      class="col-lg-6 text-sm text-muted fw-bolder mb-2"
+                      *ngIf="mc.length &lt;= 5"
+                    >
+                      {{ mc }}
+                    </div>
+                    <div
+                      class="col-lg-12 text-sm text-muted fw-bolder mb-2"
+                      *ngIf="mc.length &gt; 5"
+                    >
+                      {{ mc }}
+                    </div></ng-container
+                  >
+                </div>
+              </div></ng-container
+            ><ng-container *ngIf="ref.status && showAssign">
+              <form action="#" class="invoice-repeater px-1">
+                <div
+                  class="row d-flex align-items-end border rounded-lg p-1 mb-1"
+                  *ngFor="let item of downtimes; let i = index"
+                  @heightIn
+                >
+                  <div
+                    class="col-12 mb-2 d-flex justify-content-between align-items-center"
+                  >
+                    <div class="col-lg-12 d-flex align-items-center mb-4">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+
+
+                            
+                            <ng-select #machine="ngModel" [(ngModel)]="payload.machine" (ngModelChange)="refreshMachineSpecificDetails($event)"
+                            [class.error]="!machine.valid && (detailsForm.submitted || machine.touched)"
+                            [disabled]="metadata.machines.length < 1"
+                            [items]="metadata.machines" bindLabel="label" bindValue="identifier"
+                            class="ng-select-size-xl" id="oee-machine" name="machine" placeholder="Machine" required>
+                     <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                         {{ item.label }}
+                     </ng-template>
+                 </ng-select>
+
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form> </ng-container
+            ><ng-container *ngIf="ref.status && showUnmap">
+              <div class="col-lg-12">
+                <select
+                  class="form-control"
+                  [(ngModel)]="machine"
+                  name="machine"
+                  #mach="ngModel"
+                  required
+                >
+                  <option value="" [defaultSelected]="true">
+                    Select Machine To Be Removed
+                  </option>
+                  <ng-container *ngFor="let mc of operatorMachines"
+                    ><option>{{ mc }}</option></ng-container
+                  >
+                </select>
+              </div></ng-container
+            >
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="row">
+      <div
+        class="col-lg-12 d-flex justify-content-end"
+        *ngIf="ref.status && showUnmap"
+      >
+        <button
+          class="btn btn-sm fw-bolder btn-outline-warning border-0"
+          [disabled]="machine.length &lt;= 0"
+          (click)="unmapOperator()"
+        >
+          Unmap</button
+        ><button
+          class="btn btn-sm fw-bolder btn-transparent-dark ms-2"
+          (click)="closeUnmap()"
+        >
+          Back
+        </button>
+      </div>
+      <div
+        class="col-lg-12 d-flex justify-content-between"
+        *ngIf="!showAssign && !showUnmap"
+      >
+        <div class="d-flex justify-content-evenly">
+          <button
+            class="btn btn-sm fw-bolder btn-outline-primary border-0 me-2"
+            (click)="assignUser()"
+          >
+            Assign
+          </button>
+          <button
+            class="btn btn-sm fw-bolder btn-outline-warning border-0 me-2"
+            (click)="unMap()"
+          >
+            Unmap
+          </button>
+          <button
+            class="btn btn-sm fw-bolder btn-outline-warning border-0 ms-2"
+          >
+            Deactivate
+          </button>
+          <!-- <button class="btn btn-sm fw-bolder btn-outline-success border-0 ms-2">Activate</button> -->
+          <button
+            class="btn btn-sm fw-bolder btn-outline-primary border-0"
+            (click)="
+              initRoleUpdate(
+                confirmationModal,
+                { centered: true },
+                ref.email,
+                'SUPERVISOR'
+              )
+            "
+          >
+            Promote
+          </button>
+        </div>
+        <button
+          (click)="modal.close('Cancel')"
+          class="btn btn-sm btn-transparent-dark fw-bolder ms-2"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #confirmationModal let-modal
+  ><div class="modal-header"><h5 class="modal-title">Confirm</h5></div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-12">
+        Are you sure you want to proceed with the change in role?
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-12 d-flex justify-content-end">
+        <div class="d-flex justify-content-evenly">
+          <button
+            class="btn btn-sm btn-transparent-dark fw-bolder me-2"
+            type="button"
+            (click)="modal.close('Close')"
+          >
+            Cancel</button
+          ><button
+            class="btn btn-sm fw-bolder btn-outline-primary border-0"
+            type="button"
+            (click)="modal.close('save')"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div></ng-template
+>

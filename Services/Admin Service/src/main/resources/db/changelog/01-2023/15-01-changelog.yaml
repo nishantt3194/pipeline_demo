@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1678819536801-19
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: operator
+                  type: BINARY(16)
+            tableName: entry
+  - changeSet:
+      id: 1678819536801-20
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: operator
+            baseTableName: entry
+            constraintName: FK_ENTRY_ON_OPERATOR
+            referencedColumnNames: id
+            referencedTableName: users
+  - changeSet:
+      id: 1678819536801-21
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: entry
+            constraintName: FK_ENTRY_ON_USERS
+  - changeSet:
+      id: 1678819536801-22
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: users
+            tableName: entry
+

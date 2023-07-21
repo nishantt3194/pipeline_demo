@@ -1,0 +1,13 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div [@fadeInLeft]="fadeInLeft(outlet)" [@fadeIn]="fadeIn(outlet)" [@zoomIn]="zoomIn(outlet)">
+    <div class="wave-header"></div>
+    <router-outlet #outlet="outlet"></router-outlet>
+    <app-submit-blocker></app-submit-blocker>
+    <app-loader></app-loader>
+</div>

@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1678817295003-19
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: catalog_num
+                  type: VARCHAR(255)
+            tableName: product
+  - changeSet:
+      id: 1678817295003-20
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: catelog_num
+            tableName: product
+

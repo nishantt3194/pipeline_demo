@@ -1,0 +1,23 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// progress
+
+// progress bar background color
+@each $color_name, $color in $colors {
+  @each $color_type, $color_value in $color {
+    @if $color_type== 'base' {
+      ngb-progressbar {
+        &[type='#{$color_name}'] {
+          .progress {
+            background-color: rgba($color_value, 0.1);
+          }
+        }
+      }
+    }
+  }
+}

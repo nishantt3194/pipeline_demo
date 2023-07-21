@@ -1,0 +1,51 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!-- Menu header -->
+<div class="navbar-header d-flex justify-content-center align-items-stretch flex-column">
+    <div class="nav navbar-nav justify-content-center align-items-center flex-row">
+        <a [routerLink]="['/']" class="navbar-brand">
+            <img alt="brand-logo" height="54px" src="{{ coreConfig.app.appLogoExtended }}"/>
+            <span class="logo-banner ml-1">BD</span>
+        </a>
+
+        <div (click)="toggleSidebarCollapsible()"
+             *ngIf="isCollapsed === false"
+             class="nav-link modern-nav-toggle bg-primary d-flex justify-content-center align-items-center">
+            <span [data-feather]="'arrow-right'" class="text-white"></span>
+        </div>
+
+        <div (click)="toggleSidebarCollapsible()"
+             *ngIf="isCollapsed === true"
+             class="nav-link modern-nav-toggle bg-primary d-flex justify-content-center align-items-center">
+            <span [data-feather]="'arrow-left'" class="text-white"></span>
+        </div>
+    </div>
+</div>
+<!--/ Menu header -->
+
+<!-- Navbar shadow -->
+<div [ngClass]="{ 'd-block': isScrolled }" class="shadow-bottom"></div>
+
+<!-- Main menu -->
+<div (scroll)="onSidebarScroll()" [perfectScrollbar] class="main-menu-content">
+    <ul class="navigation navigation-main" core-menu layout="vertical"></ul>
+</div>
+<!--/ Main menu -->
+
+<!-- Sidebar footer -->
+<div class="user-footer m-2 border d-flex justify-content-between align-items-center">
+    <div class="user-info d-flex justify-content-start align-items-center flex-grow-1">
+        <span class="mr-1 user-icon" [data-icon]="'user'"></span>
+        <span class="user-name font-weight-bolder">{{ currentUser ? (currentUser.firstName + ' ' + currentUser.lastName) : '--' }}</span>
+    </div>
+    
+    <button class="btn btn-flat-secondary btn-icon footer-panel-menu" (click)="logout()">
+        <span [data-icon]="'login'"></span>
+    </button>
+    
+</div>

@@ -1,0 +1,3 @@
+<!-- <app-admin-dashboard *ngIf="type == 'ADMIN' "></app-admin-dashboard> -->
+<app-supervisor-dashboard *ngIf="type == 'SUPERVISOR' || type == 'ADMIN'"></app-supervisor-dashboard>
+<app-operator-dashboard *ngIf="type == 'OPERATOR'"></app-operator-dashboard>

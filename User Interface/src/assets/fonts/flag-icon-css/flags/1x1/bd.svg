@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" version="1" width="512" xmlns="http://www.w3.org/2000/svg">
+  <g fill-rule="evenodd" stroke-width="1pt">
+    <path d="M0 0h512v512H0z" fill="#0a5c12"/>
+    <ellipse cx="470.77" cy="360.7" fill="#fc000f" rx="231.97" ry="231.97" transform="matrix(.581 0 0 .581 -57.648 46.55)"/>
+  </g>
+</svg>

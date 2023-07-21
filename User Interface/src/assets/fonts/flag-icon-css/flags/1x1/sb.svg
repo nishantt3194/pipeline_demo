@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" id="svg548" version="1.1" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata id="metadata3032">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+  <dc:format>image/svg+xml</dc:format>
+  <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs id="defs550">
+  <clipPath clipPathUnits="userSpaceOnUse" id="clipPath5251">
+   <rect fill-opacity="0.67" height="496.06" id="rect5253" width="496.06" x="0" y="-.000055504"/>
+  </clipPath>
+ </defs>
+ <g clip-path="url(#clipPath5251)" fill-rule="evenodd" id="flag" stroke-width="1pt" transform="matrix(1.0321 0 0 1.0321 0 .000057287)">
+  <path d="m0.000063477 491.39 956.69-491.39h-956.69v491.39z" fill="#0000d6" id="path1338"/>
+  <path d="m992.13-0.000053406-965.8 496.06h965.8v-496.06z" fill="#006000" id="path552"/>
+  <path d="m119.06 0h-6.38l-112.68 56.43v3.0978h6.378l112.68-56.32v-3.208z" fill="#fc0" id="path558" transform="scale(8.3333)"/>
+  <polygon fill="#fff" id="polygon1350"
+           points="476.5 433.15 498.45 365.81 441.12 324.21 511.95 324.28 533.78 256.9 555.61 324.28 626.44 324.23 569.1 365.81 591.04 433.16 591.04 433.16 533.77 391.48" transform="matrix(.52623 0 0 .49524 -211.72 -118.39)"/>
+  <polygon fill="#fff" id="polygon1351"
+           points="476.5 433.15 498.45 365.81 441.12 324.21 511.95 324.28 533.78 256.9 555.61 324.28 626.44 324.23 569.1 365.81 591.04 433.16 591.04 433.16 533.77 391.48" transform="matrix(.52623 0 0 .49524 -26.526 -118.39)"/>
+  <polygon fill="#fff" id="polygon1352"
+           points="476.5 433.15 498.45 365.81 441.12 324.21 511.95 324.28 533.78 256.9 555.61 324.28 626.44 324.23 569.1 365.81 591.04 433.16 591.04 433.16 533.77 391.48" transform="matrix(.52623 0 0 .49524 -26.526 21.596)"/>
+  <polygon fill="#fff" id="polygon1353"
+           points="476.5 433.15 498.45 365.81 441.12 324.21 511.95 324.28 533.78 256.9 555.61 324.28 626.44 324.23 569.1 365.81 591.04 433.16 591.04 433.16 533.77 391.48" transform="matrix(.52623 0 0 .49524 -118.58 -47.579)"/>
+  <polygon fill="#fff" id="polygon1354"
+           points="476.5 433.15 498.45 365.81 441.12 324.21 511.95 324.28 533.78 256.9 555.61 324.28 626.44 324.23 569.1 365.81 591.04 433.16 591.04 433.16 533.77 391.48" transform="matrix(.52623 0 0 .49524 -211.72 21.596)"/>
+ </g>
+</svg>

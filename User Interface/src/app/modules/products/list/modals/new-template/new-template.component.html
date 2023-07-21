@@ -1,0 +1,72 @@
+<div class="modal-body px-0">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-lg-12 text-center text-lg fw-bolder text-gray-800">{{ templateType | titlecase }} Template
+            </div>
+        </div>
+        <hr/>
+        <form [formGroup]="newTemplate" id="newTemplate">
+            <ng-container formArrayName="templates">
+                <ng-container *ngFor='let template of formArr["controls"]; index as i'>
+                    <div [formGroupName]="i" class="row mb-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <input class="form-control" formControlName="description"
+                                       placeholder="Enter Description"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input-group">
+                                <div class="input-group-text p-0">
+                                    <select class="form-control form-select border-0" formControlName="sign">
+                                        <option value="ADD">+</option>
+                                        <option value="SUB">-</option>
+                                        <option value="NONE">o</option>
+                                    </select>
+                                </div>
+                                <input class="form-control" placeholder="Input" readonly/>
+                                <div class="input-group-text p-0">
+                                    <select *ngIf='template["controls"]["toConvert"].value'
+                                            class="form-control form-select border-0" formControlName="operation">
+                                        <option value="MULTIPLY">x</option>
+                                        <option value="DIVIDE">/</option>
+                                    </select>
+                                </div>
+                                <select *ngIf='template["controls"]["toConvert"].value' class="form-control form-select"
+                                        formControlName="formulaType">
+                                    <option [defaultSelected]='template["controls"]["toConvert"].value === null || template["controls"]["toConvert"].value === ""'
+                                            disabled
+                                            value="">
+                                        Select Operand
+                                    </option>
+                                    <option value="CONSTANT">Constant</option>
+                                    <option value="EXPRESSION">Weight</option>
+                                </select>
+                                <input *ngIf='template["controls"]["toConvert"].value &amp;&amp; template["controls"]["formulaType"].value === "CONSTANT"' class="form-control"
+                                       formControlName="operand"
+                                       placeholder="Enter Value"/>
+                                <button (click)="addConversion(i)" *ngIf='!template["controls"]["toConvert"].value'
+                                        class="btn btn-outline-primary">
+                                    Add Conversion
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-2"/>
+                </ng-container>
+            </ng-container>
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-between">
+                    <button (click)="addFields()" class="btn btn-outline-primary border-0 btn-sm"> + Add More
+                        Templates
+                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button (click)='modal.close("close")' class="btn border-0 btn-outline-dark btn-sm">Close
+                        </button>
+                        <button (click)="save()" class="btn btn-outline-primary border-0 btn-sm">Save Template</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

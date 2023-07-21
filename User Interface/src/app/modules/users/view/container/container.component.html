@@ -1,0 +1,281 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+  <div class="content-body">
+    <app-screen-header>
+      <div
+        class="d-flex justify-content-start align-items-center user-header-wrapper"
+        content
+      >
+        <div
+          class="profile-img shadow-primary user-initials-wrapper rounded"
+          style="padding: 0.5rem"
+        >
+          <div
+            class="avatar w-100 h-100 d-flex justify-content-center align-items-center rounded bg-light-primary avatar-xl"
+          >
+            <span class="avatar-content font-large-3 font-weight-bolder"
+              >D</span
+            >
+          </div>
+        </div>
+        <div
+          content
+          class="card mb-0 shadow-primary px-2 ml-1 flex-grow-1"
+          style="min-height: 150px"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div
+                    class="col-12 d-flex justify-content center align-items-start flex-column"
+                  >
+                    <div class="font-weight-bolder font-large-2">
+                      {{ ref.fullName }}
+                    </div>
+                    <div
+                      class="font-weight-bold font-medium-3 d-flex justify-content-start align-items-center"
+                    >
+                      <span
+                        [data-feather]="'award'"
+                        class="font-medium-2"
+                      ></span>
+                      <span
+                        class="font-weight-bolder font-medium-2"
+                        style="margin-left: 0.1rem"
+                        >{{ ref.email }}</span
+                      >
+                    </div>
+                    <div class="font-weight-bold font-medium-3">
+                      <span
+                        class="d-flex justify-content-start align-items-center"
+                        ><span class="">{{ ref.role | titlecase }}</span
+                        ><span class=""> {{ ref.area }}</span></span
+                      >
+                    </div>
+
+                    <div
+                      class="d-flex justify-content-start align-items-center mt-1"
+                    >
+                      <button
+                        (click)="assignMachine()"
+                        *ngIf="ref.status === true && ref.role === 'OPERATOR'"
+                        class="btn btn-sm btn-flat-primary mr-1 rounded"
+                      >
+                        <span [data-feather]="'clipboard'"></span>
+                        <span style="margin-left: 0.4rem">Assign Machines</span>
+                      </button>
+                      <button
+                        (click)="unmapOperator()"
+                        *ngIf="
+                          ref.status === true &&
+                          ref.role === 'OPERATOR' &&
+                          ref.assigned === true
+                        "
+                        class="btn btn-sm btn-flat-warning mr-1 rounded"
+                      >
+                        <span [data-feather]="'clipboard'"></span>
+                        <span style="margin-left: 0.4rem">Unmap Machines</span>
+                      </button>
+
+                      <button
+                        (click)="
+                          initRoleUpdate(
+                            confirmationModal,
+                            { centered: true },
+                            ref.id,
+                            ref.status,
+                            'SUPERVISOR'
+                          )
+                        "
+                        *ngIf="ref.status === true && ref.role === 'OPERATOR'"
+                        class="btn btn-sm btn-flat-primary mr-1 rounded"
+                      >
+                        <span [data-feather]="'user-plus'"></span>
+                        <span style="margin-left: 0.4rem">Promote</span>
+                      </button>
+
+                      <button
+                        *ngIf="ref.status === true && ref.role === 'SUPERVISOR'"
+                        (click)="
+                          initRoleUpdate(
+                            confirmationModal,
+                            { centered: true },
+                            ref.id,
+                            ref.status,
+                            'OPERATOR'
+                          )
+                        "
+                        class="btn btn-sm btn-flat-warning mr-1 rounded"
+                      >
+                        <span [data-feather]="'user-minus'"></span>
+                        <span style="margin-left: 0.4rem">Demote</span>
+                      </button>
+
+                      <button
+                        *ngIf="!ref.status"
+                        class="btn btn-sm btn-flat-success rounded"
+                        (click)="
+                          statusUpdate(
+                            statusConfirmationModal,
+                            { centered: true },
+                            ref.id,
+                            true,
+                            ref.role
+                          )
+                        "
+                      >
+                        <span [data-feather]="'user-check'"></span>
+                        <span style="margin-left: 0.4rem">Enable</span>
+                      </button>
+
+                      <button
+                        *ngIf="ref.status"
+                        class="btn btn-sm btn-flat-danger rounded"
+                        (click)="
+                          statusUpdate(
+                            statusConfirmationModal,
+                            { centered: true },
+                            ref.id,
+                            false,
+                            ref.role
+                          )
+                        "
+                      >
+                        <span [data-feather]="'user-x'"></span>
+                        <span style="margin-left: 0.4rem">Disable</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-screen-header>
+
+    <div
+      *ngIf="ref.role === 'OPERATOR' && ref.status === true"
+      class="row px-3"
+      style="margin-top: 5.2rem"
+    >
+      <div class="col-12">
+        <app-table-builder
+          [actions]="true"
+          [builder]="builder"
+          [builderArgs]="{ userId: ref.id }"
+          [enableHeaderActions]="true"
+          [headers]="headers"
+          [mode]="'builder'"
+          (view)="openMachine($event)"
+        ></app-table-builder>
+      </div>
+
+      <!-- <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 font-weight-extra-bold mb-2 font-medium-3">
+                Recent Entries
+              </div>
+            </div>
+
+            <div *ngFor="let entry of entries"
+              class="rounded border p-2 d-flex justify-content-center align-items-start flex-column mb-1"
+            >
+              <div
+                class="font-weight-extra-bold font-medium-3"
+                style="margin-bottom: 1rem"
+              >
+               {{entries.machineName}}
+              </div>
+              <div
+                class="font-weight-bolder font-medium-1"
+                style="margin-bottom: 0.4rem"
+              >
+                12 Apr 2023
+              </div>
+              <div
+                class="font-weight-bolder font-medium-1"
+                style="margin-bottom: 0.4rem"
+              >
+                NS-203453 3ml Plunger
+              </div>
+              <div class="font-weight-bolder font-medium-1">
+                Shift A, IVC Assembly
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <ng-template #confirmationModal let-modal
+    ><div class="modal-header"><h5 class="modal-title">Confirm</h5></div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-12">
+          Are you sure you want to proceed with the change in role?
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-12 d-flex justify-content-end">
+          <div class="d-flex justify-content-evenly">
+            <button
+              class="btn btn-sm btn-transparent-dark fw-bolder me-2"
+              type="button"
+              (click)="modal.close('Close')"
+            >
+              Cancel</button
+            ><button
+              class="btn btn-sm fw-bolder btn-outline-primary border-0"
+              type="button"
+              (click)="modal.close('save')"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div></ng-template
+  >
+
+  <ng-template #statusConfirmationModal let-modal
+    ><div class="modal-header"><h5 class="modal-title">Confirm</h5></div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-12">
+          Are you sure you want to proceed with the change in Status?
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-12 d-flex justify-content-end">
+          <div class="d-flex justify-content-evenly">
+            <button
+              class="btn btn-sm btn-transparent-dark fw-bolder me-2"
+              type="button"
+              (click)="modal.close('Close')"
+            >
+              Cancel</button
+            ><button
+              class="btn btn-sm fw-bolder btn-outline-primary border-0"
+              type="button"
+              (click)="modal.close('save')"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div></ng-template
+  >
+</div>

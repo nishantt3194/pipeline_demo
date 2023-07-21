@@ -1,0 +1,24 @@
+<div class="card content-card">
+  <div class="card-body">
+    <app-table-builder
+      (view)="viewOperator($event)"
+      [builder]="builder"
+      [builderArgs]="{ role: 'OPERATOR' }"
+      [createCallback]="openNewUserDialog"
+      [create]="true"
+      [enableHeaderActions]="true"
+      [headers]="headers"
+      [mode]="'builder'"
+      [headerActions]="[
+        {
+          icon: 'user-plus',
+          name: 'Assign Machine',
+          needSelected: true,
+          action: assignMachine
+        }
+      ]"
+    ></app-table-builder>
+  </div>
+</div>
+
+

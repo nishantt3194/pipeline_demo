@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1678820432436-19
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: availability
+                  type: DOUBLE
+            tableName: entry
+  - changeSet:
+      id: 1678820432436-20
+      author: animeshh-parashar
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: availablity
+            tableName: entry
+

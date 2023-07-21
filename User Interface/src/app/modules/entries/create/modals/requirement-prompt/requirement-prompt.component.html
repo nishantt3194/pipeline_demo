@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <div class="modal-title d-flex justify-content-center align-items-center font-weight-bolder">Confirm Downtime</div>
+</div>
+<div class="modal-body container p-2">
+    <div class="row">
+        <div class="col-12 mb-1">
+            <ngb-alert [type]="'primary'" [dismissible]="false">
+                <div class="alert-body"><strong>Hi,</strong> We need your confirmation about the entered downtime</div>
+            </ngb-alert>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm p-2" *ngFor="let req of requirements">
+            <button class="btn w-100 p-3 font-weight-extra-bold btn-outline-secondary btn-xl" (click)="saveRequirement(req)">
+                {{ req.prompt }}
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm p-2" >
+            <button class="btn w-100 p-3 font-weight-extra-bold btn-outline-warning btn-xl" (click)="saveRequirement(null)">
+                No
+            </button>
+        </div>
+    </div>
+</div>

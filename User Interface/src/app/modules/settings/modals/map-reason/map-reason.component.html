@@ -1,0 +1,114 @@
+<div class="modal-body">
+  <div class="container" ngbAutoFocus>
+    <div class="row">
+      <div class="row mb-2">
+        <div class="col-12">
+          <span class="font-weight-bolder">Map Reason</span>
+        </div>
+      </div>
+
+    <form #newDowntime="ngForm" id="newDowntime" (ngSubmit)="mapReason(newDowntime)">
+      <div class="row mb-1 px-1">
+        <div class="form-group col-12 mb-1">
+          <ng-select
+            [(ngModel)]="parentCategory"
+            [disabled]="true"
+            [items]="categories"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select"
+            id="parentCategory"
+            name="parentCategory"
+            placeholder="Category"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+        <div class="form-group col-12 mb-1">
+          <ng-select
+            [(ngModel)]="subCategory"
+            [items]="getSubCategories(parentCategory)"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select"
+            id="subCategory"
+            name="subCategory"
+            placeholder="Sub Category"
+            disabled="true"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+
+        <div class="form-group col-12 mb-1">
+          <ng-select
+            [(ngModel)]="reason"
+            [items]="reasons"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select"
+            id="reason"
+            name="reason"
+            placeholder="Reason"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+
+        <div class="form-group col-12 mb-1">
+          <ng-select
+            [(ngModel)]="machine"
+            [items]="machines"
+            [disabled]="machines.length < 1"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select"
+            id="machine"
+            name="machine"
+            placeholder="Machine"
+            (ngModelChange)="refreshStations($event)"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+
+        <div class="form-group col-12 mb-1">
+          <ng-select
+            [(ngModel)]="station"
+            [items]="stations"
+            [disabled]="stations.length < 1"
+            bindLabel="label"
+            bindValue="identifier"
+            class="ng-select"
+            id="station"
+            name="station"
+            placeholder="Station"
+            required
+          >
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <div class="modal-footer">
+    <button class="btn btn-sm btn-flat-primary rounded" (click)="close()" type="button">Cancel</button>
+    <button class="btn btn-sm btn-primary rounded" type="submit" form="newDowntime">Save</button>
+  </div>
+  

@@ -1,0 +1,15 @@
+<div class="card content-card">
+    <div class="card-body">
+        <app-table-builder
+                (view)="viewSupervisor($event)"
+                [builder]="builder"
+                [builderArgs]="{ role: 'SUPERVISOR' }"
+                [createCallback]="openNewUserDialog"
+                [create]="true"
+                [enableHeaderActions]="true"
+                [headers]="headers"
+                [mode]="'builder'"
+                [search]="true"
+        ></app-table-builder>
+    </div>
+</div>

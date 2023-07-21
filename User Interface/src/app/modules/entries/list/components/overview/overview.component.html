@@ -1,0 +1,14 @@
+<div class="card content-card">
+  <div class="card-body">
+    <app-table-builder
+      (view)="openEntryView($event)"
+      [createCallback]="newEntry"
+      [create]="true"
+      [data]="data"
+      [headers]="headers"
+      [mode]="'data'"
+      [actions]="true"
+      [rowCallbacks]="[{tag: 'Edit Entry', icon: 'archive', callback: editEntry }]"
+    ></app-table-builder>
+  </div>
+</div>

@@ -1,0 +1,344 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<ng-template #modalWarning let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel160">No Record Selected</h5>
+    </div>
+    <div class="modal-body text-center" ngbAutofocus tabindex="0">
+        One or More Record need to be selected to perform this action
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.close('Accept click')" class="btn btn-sm btn-warning" rippleEffect type="button">
+            Close
+        </button>
+    </div>
+</ng-template>
+
+<div>
+    <div *ngIf="toolbar" class="d-flex justify-content-between align-items-center mb-1">
+        <div *ngIf="search" class="filter flex-grow-1">
+            <fieldset>
+                <div class="input-group input-group-merge bg-body" style="height: 64px;">
+                    <div class="input-group-prepend" ngbDropdown>
+                        
+                        <button aria-expanded="false" aria-haspopup="true"
+                                class="btn btn-flat disable-arrow border border border-right-0" data-toggle="dropdown"
+                                ngbDropdownToggle
+                                rippleEffect type="button">
+                            {{ activeHeader.header }}
+                        </button>
+                        
+                        <div ngbDropdownMenu>
+                            <a (click)="switchFilter(_header)" *ngFor="let _header of headers"
+                               ngbDropdownItem>{{ _header.header }}</a>
+                        </div>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><span [data-feather]="'search'"></span></span>
+                    </div>
+                    <input class="form-control form-control-lg"
+                           style="height: 64px;"
+                           placeholder="Search" [(ngModel)]="searchTerm"
+                           #search type="text"/>
+                </div>
+            </fieldset>
+        </div>
+
+        <div *ngIf="!disableAllActions"
+             class="actions ml-2 flex-grow-0 d-flex justify-content-evenly align-items-center">
+            <div class="btn-group rounded btn-group-xl btn-outlined bg-body" role="group">
+                <a *ngIf="export && !(loading | async)" [data]="toBeExported" [headers]="exportHeaders"
+                   [ngbTooltip]="'Export Data to CSV'"
+                   [placement]="'bottom'" class="btn btn-xl btn-icon btn-outline-default border-right-0" csvLink
+                   rippleEffect role="button" style="height: 64px;"><span [data-icon]="'outline_arrow_download'"></span></a>
+                
+                <a *ngIf="export && (loading | async)"
+                   [ngbTooltip]="'Export Data to CSV'"
+                   [placement]="'bottom'" class="btn btn-xl btn-icon btn-outline-default border-right-0 disabled"
+                   rippleEffect role="button" style="height: 64px;"><span [data-icon]="'outline_arrow_download'"></span></a>
+
+
+                <div container="body" ngbDropdown>
+                    <button
+                            class="btn btn-xl btn-icon border-left-0 btn-outline-default hide-arrow"
+                            ngbDropdownToggle
+                            rippleEffect
+                            style="border-bottom-left-radius: 0;border-top-left-radius: 0;height: 64px;"
+                            type="button">
+                        <span [data-icon]="'outline_essential_menu_horizontal'"></span>
+                    </button>
+                    <div ngbDropdownMenu>
+                        <a (click)="refresh()" *ngIf="delete" ngbDropdownItem>
+                            <span [data-icon]="'refresh'"></span> Reload</a>
+                        
+                        <a (click)="execCreate()" *ngIf="create" ngbDropdownItem><span [data-feather]="'plus'"></span>
+                            Create</a>
+                        <a (click)="execDelete()" *ngIf="delete" ngbDropdownItem>
+                            <span [data-feather]="'minus'"></span> Delete</a>
+                        <div *ngIf="enableHeaderActions" class="dropdown-divider"></div>
+
+                        <ng-container *ngIf="enableHeaderActions">
+                            <a (click)="action.needSelected ? (selected && selected.length > 0 ? action.action(selected) : openWarning(modalWarning)) : action.action()"
+                               *ngFor="let action of headerActions"
+                               ngbDropdownItem rippleEffect
+                               type="button">
+                                <span [data-feather]="action.icon"></span> {{ action.name }}
+                            </a>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="filter" class="btn-group rounded btn-group-lg ml-1 bg-body" style="height: 64px;">
+                <div ngbDropdown>
+                    <button class="btn disable-arrow btn-outline-default px-2 btn-icon btn-lg" id="quickFilter"
+                            ngbDropdownToggle rippleEffect style="height: 64px;" type="button">
+                        <span [data-icon]="'outline_essential_filter'"></span>
+                    </button>
+                    <div aria-labelledby="quickFilter" ngbDropdownMenu>
+                        <a href="javascript:void(0)" ngbDropdownItem>Active</a>
+                        <a href="javascript:void(0)" ngbDropdownItem>Inactive</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="toolbar && search && (activeSearchTerms | async).length > 0" class="mb-1 actions flex-grow-0 border rounded d-flex justify-content-between align-items-center p-1">
+        <div class="d-flex justify-content-start align-items-center">
+            <div class="badge badge-light-primary mr-1" *ngFor="let activeSearchChip of (activeSearchTerms | async)">{{ activeSearchChip.header + ' - ' + activeSearchChip.term }}</div>
+        </div>
+        <button class="btn btn-sm btn-primary" (click)="clearSearch()">Clear</button>
+    </div>
+
+    <div *ngIf="loading | async" class="d-flex justify-content-center align-items-center p-0 border"
+         style="min-height: 200px !important">
+        <div aria-hidden="true" class="spinner-border text-secondary mr-2" role="status"></div>
+        <strong>Loading Data...</strong>
+    </div>
+
+    <div class="card border-0">
+        <div class="card-body-p-0 border-0">
+            <div *ngIf="!(loading | async)" class="p-0 border rounded table-responsive">
+                <ngx-datatable #detailed
+                               (activate)="doubleClicked($event)"
+                               (select)="onSelect($event)"
+                               [columnMode]="ColumnMode.force"
+                               [footerHeight]="disableFooter ? 0 : 44"
+                               [limit]="mode === 'builder' ? (tableData.length < rows.content.length ? (tableData.length < 10 ? tableData.length : (size | async)) : rows.content.length < 10 ? rows.content.length : (size | async)) : (tableData.length < 10 ? tableData.length : (size | async))"
+                               [ngClass]="{ 'header-dark': headerDark, 'header-light': !headerDark }"
+                               [reorderable]="true"
+                               [rowHeight]="58" [rows]="tableData"
+                               [scrollbarH]="true"
+                               [selectionType]="SelectionType.checkbox"
+                               class="bootstrap core-bootstrap table-striped">
+<!--                     [externalPaging]="mode === 'builder'"  -->
+<!--                                [count]="mode === 'builder' ? rows.totalElements : data.length" -->
+<!--                     [offset]="(offset | async)" -->
+<!--                     (page)="switchPage($event)" -->
+
+                    <ngx-datatable-row-detail *ngIf="addDetailPane" [id]="id" [rowHeight]="detailHeight">
+                        <ng-template let-expanded="expanded" let-row="row" ngx-datatable-row-detail-template>
+                            <div class="ml-75 px-5 pt-75 pb-5">
+                                <ng-container *ngFor="let _header of headers">
+                                    <dl *ngIf="_header.isExtra" class="row">
+                                        <dt class="col-sm-2 text-truncate">{{ _header.header }}</dt>
+                                        <dd class="col-sm-10">
+                                            <p *ngIf="_header.type !== 'blob'" class="px-5">
+                                                {{ row[_header.field] }}
+                                            </p>
+                                            <p *ngIf="_header.type === 'blob'" class="text-justify limited-text px-5"
+                                               style="white-space: normal;word-break: break-all;width: 80%;">
+                                                {{ row[_header.field] }}
+                                            </p>
+                                        </dd>
+                                    </dl>
+                                </ng-container>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-row-detail>
+
+                    <ngx-datatable-column *ngIf="selectable" [canAutoResize]="false" [draggable]="false"
+                                          [resizeable]="false" [sortable]="false" [width]="50">
+                        <ng-template let-allRowsSelected="allRowsSelected" let-selectFn="selectFn" let-value="value"
+                                     ngx-datatable-header-template>
+                            <div class="custom-control custom-checkbox">
+                                <input (change)="selectFn(!allRowsSelected)" [checked]="allRowsSelected"
+                                       class="custom-control-input" id="headerChkbxRef" type="checkbox"/>
+                                <label class="custom-control-label" for="headerChkbxRef"></label>
+                            </div>
+                        </ng-template>
+                        <ng-template let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
+                                     let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                            <div class="custom-control custom-checkbox">
+                                <input (change)="onCheckboxChangeFn($event)" [checked]="isSelected"
+                                       class="custom-control-input" id="rowChkbxRef{{ rowIndex }}" type="checkbox"/>
+                                <label class="custom-control-label" for="rowChkbxRef{{ rowIndex }}"></label>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column *ngIf="actions && rowCallbacks.length > 0" [canAutoResize]="false"
+                                          [draggable]="false" [resizeable]="false" [sortable]="false"
+                                          [width]="50" name="">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center" container="body" ngbDropdown>
+                                <button aria-expanded="false" aria-haspopup="true"
+                                        class="btn btn-sm btn-icon btn-flat-secondary hide-arrow" data-toggle="dropdown"
+                                        id="dropdownBrowserState" ngbDropdownToggle>
+                                    <i class="cursor-pointer" data-feather="more-vertical"></i>
+                                </button>
+                                <div aria-labelledby="dropdownBrowserState" class="dropdown-menu-right" ngbDropdownMenu>
+                                    <div *ngFor="let action of rowCallbacks" class="px-1">
+                                        <button *ngIf="action.redirect" [queryParams]="buildParameters(action, row)"
+                                                [routerLink]="[action.link.link]"
+                                                class="btn btn-flat-secondary w-100 btn-icon d-flex align-items-center"
+                                                ngbDropdownItem>
+                                            <i [data-feather]="action.icon" class="mr-50"></i>{{ action.tag }}
+                                        </button>
+
+                                        <button (click)="action.callback($event, row)" *ngIf="!action.redirect"
+                                                class="btn btn-flat-secondary w-100 btn-icon d-flex align-items-center"
+                                                ngbDropdownItem>
+                                            <i [data-feather]="action.icon" class="mr-50"></i>{{ action.tag }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column *ngIf="addDetailPane" [canAutoResize]="false" [draggable]="false"
+                                          [resizeable]="false" [sortable]="false" [width]="50">
+                        <ng-template ngx-datatable-header-template>
+                            <div class="d-flex justify-content-center align-items-center h-100"></div>
+                        </ng-template>
+                        <ng-template let-expanded="expanded" let-row="row" ngx-datatable-cell-template>
+                            <button (click)="rowDetailsToggleExpand(row)" [class.datatable-icon-down]="expanded"
+                                    [class.datatable-icon-right]="!expanded"
+                                    class="btn btn-icon btn-sm btn-flat-secondary"
+                                    title="Expand/Collapse Row"></button>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ng-container *ngFor="let _header of headers">
+                        <ngx-datatable-column
+                                *ngIf="!_header.isExtra && _header.type !== 'status' && _header.type !== 'enum' && _header.type !== 'progress' && _header.type != 'tagList' && _header.type != 'tag'"
+                                [name]="_header.header" [width]="getColumnWidth(_header.field)"
+                                [prop]="_header.field" [minWidth]="getColumnWidth(_header.field)" [maxWidth]="400">
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column *ngIf="!_header.isExtra && _header.type === 'status'"
+                                              [name]="_header.header" [width]="getColumnWidth(_header.field)"
+                                              [prop]="_header.field" [minWidth]="getColumnWidth(_header.field)" [maxWidth]="400">
+                            <ng-template let-status="value" ngx-datatable-cell-template>
+                                <div class="d-flex justify-content-center align-items-center w-100">
+                                    <div [ngClass]="{
+                              'badge-light-success': status,
+                              'badge-light-danger': !status
+                            }" class="badge badge-pill rounded" style="width:72px;">
+                                        {{ status ? "Active" : "Inactive" }}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column *ngIf="!_header.isExtra && _header.type === 'enum'"
+                                              [name]="_header.header" [prop]="_header.field"
+                                              [width]="getColumnWidth(_header.field)"
+                                              [minWidth]="getColumnWidth(_header.field)" [maxWidth]="400">
+                            <ng-template let-status="value" ngx-datatable-cell-template>
+                                <div class="d-flex justify-content-center align-items-center w-100">
+                                    <div [ngClass]="'badge-light-' + status.color"
+                                         class="badge badge-pill rounded px-2">
+                                        {{ status.value }}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column *ngIf="!_header.isExtra && _header.type === 'tagList'"
+                                              [name]="_header.header" [prop]="_header.field"
+                                              [width]="getColumnWidth(_header.field)"
+                                              [minWidth]="getColumnWidth(_header.field)" [maxWidth]="400">
+                            <ng-template let-data="value" ngx-datatable-cell-template>
+                                <div class="d-flex justify-content-center align-items-center w-100">
+                                    <div
+                                         class="badge badge-pill rounded px-2 badge-light-secondary mr-1" *ngFor="let tag of data">
+                                        {{ tag }}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column *ngIf="!_header.isExtra && _header.type === 'tag'"
+                                              [name]="_header.header" [prop]="_header.field"
+                                              [width]="getColumnWidth(_header.field)"
+                                              [minWidth]="getColumnWidth(_header.field)" [maxWidth]="400">
+                            <ng-template let-data="value" ngx-datatable-cell-template>
+                                <div class="d-flex justify-content-center align-items-center w-100">
+                                    <div
+                                            class="badge badge-pill rounded px-2 badge-light-primary mr-1">
+                                        {{ data }}
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column *ngIf="!_header.isExtra && _header.type === 'progress'"
+                                              [name]="_header.header" [width]="getColumnWidth(_header.field)"
+                                              [prop]="_header.field" [minWidth]="getColumnWidth(_header.field)" [maxWidth]="400">
+                            <ng-template let-status="value" ngx-datatable-cell-template>
+                                <div class="d-flex justify-content-center align-items-center w-100">
+                                    <ngb-progressbar [type]="getProgressColor(status.value, status.max)"
+                                                     [value]="getProgress(status.value, status.max)"
+                                                     style="width: 180px; height: 14px;"></ngb-progressbar>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+
+                    </ng-container>
+
+                    <ngx-datatable-footer *ngIf="!disableFooter">
+                        <ng-template let-curPage="curPage" let-isVisible="isVisible" let-offset="offset"
+                                     let-pageSize="pageSize" let-rowCount="rowCount" let-selectedCount="selectedCount"
+                                     ngx-datatable-footer-template>
+
+                            <ng-select (ngModelChange)="updatePageSize($event)" [ngModel]="(size | async)" [clearable]="false" [items]="sizes" bindLabel="label"
+                                       bindValue="size" class="ng-select disable-arrow">
+                                <ng-template let-item="item" ng-label-tmp>
+                                    {{ item.label }} Entries
+                                </ng-template>
+
+                                <ng-template let-item="item" ng-option-tmp>
+                                    {{ item.label }}
+                                </ng-template>
+                            </ng-select>
+
+                            <div class="page-count">
+                        <span *ngIf="selected.length > 0">
+                          {{selected.length}} Selected /
+                        </span>{{ rowCount ? rowCount.toLocaleString() : '0' }} Total
+                            </div>
+
+                            <datatable-pager (change)="table.onFooterPage($event)" [count]="rowCount"
+                                             [hidden]="!((rowCount / pageSize) > 1)" [page]="curPage"
+                                             [pagerLeftArrowIcon]="'datatable-icon-left'"
+                                             [pagerNextIcon]="'datatable-icon-skip'"
+                                             [pagerPreviousIcon]="'datatable-icon-prev'"
+                                             [pagerRightArrowIcon]="'datatable-icon-right'" [size]="pageSize">
+                            </datatable-pager>
+                        </ng-template>
+                    </ngx-datatable-footer>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>

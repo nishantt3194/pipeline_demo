@@ -1,0 +1,30 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// ================================================================================================
+//  File Name: ext-component-media-player.scss
+//  Description: Media Player SCSS.
+//  ----------------------------------------------------------------------------------------------
+//  Item Name: Future Algorithms
+//  Author: Future Algorithms
+//  Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+// to remove outline on focus
+.audio-player {
+  &:focus {
+    outline: 0;
+  }
+}
+
+.plyr__controls {
+  justify-content: flex-start;
+}
+
+.plyr__progress {
+  flex-grow: 1;
+}

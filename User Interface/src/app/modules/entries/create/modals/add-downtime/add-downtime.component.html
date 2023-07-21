@@ -1,0 +1,108 @@
+<div class="modal-dialog sidebar-lg">
+  <div class="modal-content p-0">
+    <div class="modal-header mb-1 pt-1 p-0">
+      <div class="modal-title w-100 p-0">
+        <div class="row px-0 mx-0">
+          <div
+            class="col-12 mb-1 d-flex justify-content-center align-items-center font-medium-3 font-weight-bolder"
+          >
+            Add Downtime
+          </div>
+          <div class="col-12 px-0">
+            <button
+              (click)="addItem()"
+              class="btn btn-icon btn-secondary w-100 rounded-0"
+              rippleEffect
+              type="button"
+            >
+              <i class="mr-1" data-feather="plus"></i>
+              <span class="font-small-3">Add Downtime</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body flex-grow-1">
+      <form action="#" class="invoice-repeater px-1" *ngIf="downtimes">
+        <div class="row d-flex align-items-end border rounded-lg p-1 mb-1" *ngFor="let item of downtimes; let i = index"
+            @heightIn>
+            <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+                <button (click)="updateType(i)" class="btn btn-flat-secondary flex-grow-1">
+                    {{
+                    item.type === "STATION_SPECIFIC" ? "Station Specific" : "Common"
+                    }}
+                </button>
+                <button class="btn btn-flat-danger text-nowrap flex-grow-0" rippleEffect (click)="deleteItem(i)">
+                    <i data-feather="trash-2"></i>
+                </button>
+            </div>
+            <div class="form-group col-12 mb-1">
+                <ng-select [(ngModel)]="item.parentCategory" (ngModelChange)="resetEvaluation(i)"
+                    [disabled]="metadata.categories.length < 1 || item.type==='STATION_SPECIFIC'?true:false" [items]="metadata.categories" bindLabel="label"
+                    bindValue="identifier" class="ng-select" id="parentCategory{{ i }}" name="parentCategory{{ i }}"
+                    placeholder="Category" required>
+                    <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                        {{ item.label }}
+                    </ng-template>
+                </ng-select>
+            </div>
+            <div class="form-group col-12 mb-1">
+                <ng-select [(ngModel)]="item.subCategory" [items]="getSubCategories(item.parentCategory)"
+                     [disabled]="item.type==='STATION_SPECIFIC'?true:false" (ngModelChange)="refreshEvaluation($event, i)" bindLabel="label" bindValue="identifier"
+                    class="ng-select" id="subCategory{{ i }}" name="subCategory{{ i }}" placeholder="Sub Category" required>
+                    <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                        {{ item.label }}
+                    </ng-template>
+                </ng-select>
+            </div>
+            <div *ngIf="item.type == 'STATION_SPECIFIC'" class="form-group col-12">
+                <ng-select [(ngModel)]="item.station" [disabled]="metadata.stations.length < 1" [items]="metadata.stations"
+                    bindLabel="label" bindValue="identifier" class="ng-select" id="station{{ i }}" name="station{{ i }}"
+                    placeholder="Station" required>
+                    <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                        {{ item.label }}
+                    </ng-template>
+                </ng-select>
+            </div>
+            <div class="form-group col-12">
+                <ng-select [(ngModel)]="item.reason" bindLabel="label" bindValue="identifier" class="ng-select"
+                    id="reason{{ i }}" name="reason{{ i }}" placeholder="Reason" required>
+                    <ng-option [value]="rea.identifier" *ngFor="let rea of getReasons(i)">{{ rea.label }}</ng-option>
+                </ng-select>
+            </div>
+            <div class="form-group col-12">
+                <input class="form-control" placeholder="Time (in mins)" [(ngModel)]="item.time" name="time{{ i }}"
+                    type="number" min="0" />
+            </div>
+            <div class="form-group col-12">
+                <button class="btn btn-secondary w-100" type="button" [disabled]="item.evaluated" (click)="evaluate(i)">
+                    {{ item.evaluated ? "Evaluated" : "Evaluate" }}
+                </button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    <div class="modal-footer">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <button
+          (click)="submit()"
+          class="btn btn-secondary w-100 mr-1"
+          rippleEffect
+          type="submit"
+        >
+          <span class="align-middle d-sm-inline-block d-none">Save</span>
+        </button>
+        <button
+          (click)="toggleSidebar()"
+          class="btn btn-flat-secondary w-100 ml-1"
+          rippleEffect
+          type="reset"
+        >
+          <span class="align-middle d-sm-inline-block d-none">Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

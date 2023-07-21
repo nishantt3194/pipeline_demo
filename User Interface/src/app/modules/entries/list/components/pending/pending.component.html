@@ -1,0 +1,14 @@
+<div class="card content-card">
+    <div class="card-body">
+        <app-table-builder
+                (view)="openPendingEntry($event)"
+                [createCallback]="newEntry"
+                [create]="true"
+                [delete]="true"
+                [deleteCallback]="deleteEntry"
+                [data]="data"
+                [headers]="headers"
+                [mode]="'data'"
+        ></app-table-builder>
+    </div>
+</div>

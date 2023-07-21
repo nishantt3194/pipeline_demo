@@ -1,0 +1,253 @@
+<div class="content-wrapper container-fluid p-0">
+  <div class="content-body">
+    <app-screen-header [icon]="'outline_widget'" [title]="'Dashboard'">
+      <div class="card mb-0 shadow-primary" tag>
+        <div class="card-body d-flex flex-column justify-content-center align-items-end">
+          <!-- <span *ngIf="areaCount < 0" class="py-2">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                </span> -->
+          <span class="font-weight-bold font-large-1">{{currentDate}}</span>
+        </div>
+      </div>
+    </app-screen-header>
+    <div class="row">
+      <div class="col-lg-4 ">
+        <span class="font-large-4 font-weight-extra-bold text-center text-bold">Hi</span>
+        <span class="font-large-2 font-weight-extra-bold ml-1 mb-2">{{currentUser}},</span>
+      </div>
+      <div class="col-lg-8 ">
+
+        <div class="col-12 d-flex justify-content-end float-right">
+
+          <div class="font-large-2 font-weight-extra-bold text-center text-bold">
+            DRIVING OEE WITH PURPOSE
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-7 ">
+        <span class="font-weight-bold text-center font-large-1 ml-1  mb-2">Best Performing Machine</span>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-between">
+        <div class="form-group" style="width: 70%;">
+          <ng-select #area="ngModel" [(ngModel)]="topMachineArea" [items]="areas" bindLabel="label"
+            bindValue="identifier" class="ng-select mb-1 w-100" id="area" name="area" placeholder="Select Area"
+            required>
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+
+        <div class="justify-content-end align-items-end float-right">
+          <button class="btn btn-primary" (click)="topMachine()">
+            Show
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-3">
+        <div class="card">
+
+          <div class="row">
+            <div class="col-lg-6 col-md-5 d-flex flex-column justify-content-center"  *ngIf="topMachineRef" >
+              <div class="row">
+                <div class="col-lg-6 col-md-3">
+                  <div class="text-white-75 fw-bold mt-2 ml-2">MACHINE</div>
+                  <div class="font-medium-5 font-weight-bold text-left text-bold ml-2">
+                    {{ topMachineRef.machine }}
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="text-white-75 fw-bold mt-2">PRODUCTION</div>
+                  <div class="font-medium-5 font-weight-extra-bold text-primary ml-1">
+                    {{ topMachineRef.production }}
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="text-white-75 fw-bold mt-2">REJECTION</div>
+                  <div class="text-danger font-medium-5 font-weight-extra-bold">
+                    {{ topMachineRef.rejection }}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-3">
+                  <div class="text-white-75 fw-bold mt-2 ml-2">AREA</div>
+                  <div class="font-medium-5 font-weight-extra-bold ml-2 mb-2">
+                    {{ topMachineRef.area }}
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="text-white-75 fw-bold mt-2">OPERATING TIME</div>
+                  <div class="font-medium-5 font-weight-extra-bold text-primary mb-2">
+                    {{ topMachineRef.valurOperatingTime }} mins
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="text-white-75 fw-bold mt-2">DOWN TIME</div>
+                  <div class="font-medium-5 font-weight-extra-bold text-danger mb-2">
+                    {{ topMachineRef.downtime }} mins
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-7">
+              <div class="row">
+                <div class="col-lg-4">
+
+                  <apx-chart [series]="oeeTopPerformingChart.series" [chart]="oeeTopPerformingChart.chart"
+                    [plotOptions]="oeeTopPerformingChart.plotOptions" [labels]="oeeTopPerformingChart.labels"
+                    [stroke]="oeeTopPerformingChart.stroke" [fill]="oeeTopPerformingChart.fill">
+                  </apx-chart>
+
+                </div>
+                <div class="col-lg-4">
+
+                  <apx-chart [series]="utilizationTopPerformingChart.series"
+                    [chart]="utilizationTopPerformingChart.chart"
+                    [plotOptions]="utilizationTopPerformingChart.plotOptions"
+                    [labels]="utilizationTopPerformingChart.labels" [stroke]="utilizationTopPerformingChart.stroke"
+                    [fill]="utilizationTopPerformingChart.fill">
+                  </apx-chart>
+
+                </div>
+                <div class="col-lg-4">
+
+                  <apx-chart [series]="rejectionTopPerformingChart.series" [chart]="rejectionTopPerformingChart.chart"
+                    [plotOptions]="rejectionTopPerformingChart.plotOptions"
+                    [labels]="rejectionTopPerformingChart.labels" [stroke]="rejectionTopPerformingChart.stroke"
+                    [fill]="rejectionTopPerformingChart.fill">
+                  </apx-chart>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 col-md-3">
+        <div class="font-medium-5 font-weight-bolder ml-1 mb-1">
+          RECENT ENTRIES
+        </div>
+      </div>
+      <div class="col-lg-2 d-flex justify-content-end align-items-center ">
+        <button class="btn btn-primary mb-1" (click)="addNewEntry()">
+          Add New Entry
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let item of ref" class="col-lg-4 col-md-3">
+        <div class="card" style="cursor: pointer;" (click)="navigateToEntryView(item.id)">
+          <div class="d-flex justify-content-between align-items-center my-1">
+            <div class="text-white-75 font-weight-bolder font-medium-4 ml-1 text">{{item.shift}}</div>
+            <!-- <mark class="font-weight-bolder font-medium-2 text-primary mr-2">SUBMITTED</mark> -->
+          </div>
+          <div class="row">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+              <div class="text-white-75 fw-bold ml-1">AREA</div>
+              <div class="text-white-75 fw-bold mr-2">MACHINE</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-1 d-flex justify-content-between align-items-center">
+              <div class="text-white-75 font-weight-bolder font-medium-4 ml-1">
+                {{item.area}}
+              </div>
+              <div class="text-white-75 font-weight-bolder font-medium-4 mr-2">
+                {{item.machineName}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-3">
+        <div class="font-medium-5 font-weight-bolder ml-1 mb-1">
+          MONTHLY OVERVIEW
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5 col-md-3">
+        <div class="form-group">
+          <ng-select #area="ngModel" [(ngModel)]="areaId" [items]="areas" bindLabel="label" bindValue="identifier"
+            (change)="refreshMachines($event)" class="ng-select mb-1 w-100" id="area" name="area"
+            placeholder="Select Area" required>
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-3">
+        <div class="form-group">
+          <ng-select #machine="ngModel" [(ngModel)]="machineId" [items]="machines" bindLabel="label"
+            bindValue="identifier" class="ng-select mb-1 w-100" id="machine" name="machine" placeholder="Select Machine"
+            required>
+            <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+              {{ item.label }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="col-lg-2  justify-content-between align-items-center">
+        <div class="justify-content-end align-items-end float-right">
+          <button class="btn btn-primary" (click)="generate()">
+            Generate
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-3">
+        <div class="card">
+          <div class="row mb-1">
+            <div class="col-lg-2 col-md-3 d-flex flex-column justify-content-center">
+              <div class="font-large-2 font-weight-extra-bold text-center text-bold text-primary">
+                {{cumulativeData!==undefined?cumulativeData.production:0}}
+              </div>
+              <div class="font-medium-1 font-weight-extra-bold text-center">
+                PRODUCTION
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 d-flex flex-column justify-content-center">
+              <div class="font-large-2 font-weight-extra-bold text-bold  text-center text-danger ml-1">
+                {{cumulativeData!==undefined?cumulativeData.rejection:0}}
+
+              </div>
+              <div class="font-medium-1 font-weight-extra-bold text-center">
+                REJECTION
+              </div>
+            </div>
+            <div *ngIf="isMonthlyChartPresent" class="col-lg-4 col-md-3">
+              <apx-chart [series]="utilizationMonthlyChart.series" [chart]="utilizationMonthlyChart.chart"
+                [plotOptions]="utilizationMonthlyChart.plotOptions" [labels]="utilizationMonthlyChart.labels"
+                [stroke]="utilizationMonthlyChart.stroke" [fill]="utilizationMonthlyChart.fill">
+              </apx-chart>
+            </div>
+            <div *ngIf="isMonthlyChartPresent" class="col-lg-4 col-md-3">
+              <apx-chart [series]="oeeMonthlyChart.series" [chart]="oeeMonthlyChart.chart"
+                [plotOptions]="oeeMonthlyChart.plotOptions" [labels]="oeeMonthlyChart.labels"
+                [stroke]="oeeMonthlyChart.stroke" [fill]="oeeMonthlyChart.fill">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

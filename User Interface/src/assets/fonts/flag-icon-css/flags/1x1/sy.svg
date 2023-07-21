@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" id="svg378" version="1" width="512" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     y="0">
+ <metadata id="metadata3619">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+  <dc:format>image/svg+xml</dc:format>
+  <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs id="defs380">
+  <clipPath clipPathUnits="userSpaceOnUse" id="clipPath3830">
+   <rect fill-opacity="0.67" height="512" id="rect3832" width="512" x="0" y="0"/>
+  </clipPath>
+ </defs>
+ <g clip-path="url(#clipPath3830)" fill-rule="evenodd" id="flag">
+  <rect fill="#fff" height="512" id="rect171" rx="0" ry="0" width="512" x="0" y="5.7732e-15"/>
+  <rect fill="#fff" height="169.92" id="rect256" rx="0" ry="0" width="512" x="-3.457e-7" y="342.08"/>
+  <rect fill="#fff" height="169.92" id="rect255" width="512" x="-3.457e-7" y=".000034857"/>
+  <path d="m151.36 299.73-30.743-22.258-30.592 22.476 11.378-36.525-30.536-22.554 37.779-0.31446 11.718-36.414 11.969 36.33 37.779 0.0479-30.38 22.767 11.629 36.444z" fill="#fff" id="path205"/>
+  <path d="m436.84 299.73-30.743-22.258-30.592 22.476 11.378-36.525-30.536-22.554 37.779-0.31446 11.718-36.414 11.969 36.33 37.779 0.0479-30.38 22.767 11.629 36.444z" fill="#fff" id="path583"/>
+  <rect height="169.92" id="rect7524" rx="0" ry="0" stroke-width="1pt" width="512" x="-3.457e-7" y="342.08"/>
+  <rect fill="#f00" height="169.92" id="rect7526" stroke-width="1pt" width="512" x="-3.457e-7" y=".000034857"/>
+  <path d="m151.36 299.73-30.743-22.258-30.592 22.476 11.378-36.525-30.536-22.554 37.779-0.31446 11.718-36.414 11.969 36.33 37.779 0.0479-30.38 22.767 11.629 36.444z" fill="#090"
+        id="path7528" stroke-width=".11287"/>
+  <path d="m436.84 299.73-30.743-22.258-30.592 22.476 11.378-36.525-30.536-22.554 37.779-0.31446 11.718-36.414 11.969 36.33 37.779 0.0479-30.38 22.767 11.629 36.444z" fill="#090"
+        id="path7530" stroke-width=".11287"/>
+ </g>
+</svg>

@@ -1,0 +1,34 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+@import '@core/scss/core.scss';
+@import './assets/scss/styles';
+
+
+.text-green {
+  color: $green;
+}
+
+
+.limited-text {
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.list-group-item-action:hover, .list-group-item-action:focus {
+  color: #4e5154;
+  background-color: lighten(#babfc7, 20);
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  color: inherit !important;
+}

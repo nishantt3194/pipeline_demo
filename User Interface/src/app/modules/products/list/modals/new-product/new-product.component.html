@@ -1,0 +1,126 @@
+<div class="modal-body px-0">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-lg-12 text-center text-lg fw-bolder text-primary">
+                New Product
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-12">
+                <form #newCatalogue="ngForm" id="newCatalogue">
+                    <div class="row mb-1 px-3">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input
+                                        #number="ngModel"
+                                        [(ngModel)]="payload.number"
+                                        [class.is-invalid]="number.touched &amp;&amp; number.invalid"
+                                        [class.is-valid]="number.touched &amp;&amp; number.valid"
+                                        class="form-control form-control-solid"
+                                        id="number"
+                                        name="number"
+                                        placeholder="Enter Catalogue Number"
+                                        required="true"
+                                        type="text"
+                                />
+                                <div
+                                        *ngIf="number.touched &amp;&amp; number.errors &amp;&amp; number.errors.required"
+                                        class="invalid-feedback"
+                                >
+                                    Catalogue Number is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <select
+                                        #area="ngModel"
+                                        [(ngModel)]="payload.area"
+                                        class="form-control form-select form-control-solid"
+                                        id="area"
+                                        name="area"
+                                        required
+                                >
+                                    <option [defaultSelected]="true" value="">Select Area</option>
+                                    <ng-container *ngFor="let area of areas">
+                                        <option>{{ area }}</option>
+                                    </ng-container>
+                                </select>
+                                <div
+                                        *ngIf="area.touched &amp;&amp; area.errors &amp;&amp; area.errors.required"
+                                        class="invalid-feedback"
+                                >
+                                    Area is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1 px-3">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input
+                                        #text="ngModel"
+                                        [(ngModel)]="payload.description"
+                                        [class.is-invalid]="text.touched &amp;&amp; text.invalid"
+                                        [class.is-valid]="text.touched &amp;&amp; text.valid"
+                                        class="form-control form-control-solid"
+                                        id="text"
+                                        name="description"
+                                        placeholder="Add Description"
+                                        required="true"
+                                        type="text"
+                                />
+                                <div
+                                        *ngIf="text.touched &amp;&amp; text.errors &amp;&amp; text.errors.required"
+                                        class="invalid-feedback"
+                                >
+                                    Description is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1 px-3">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input
+                                        #weight="ngModel"
+                                        [(ngModel)]="payload.weight"
+                                        [class.is-invalid]="weight.touched &amp;&amp; weight.invalid"
+                                        [class.is-valid]="weight.touched &amp;&amp; weight.valid"
+                                        class="form-control form-control-solid"
+                                        id="weight"
+                                        name="weight"
+                                        placeholder="Component Weight (not required)"
+                                        required="true"
+                                        step="0.01"
+                                        type="number"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-end">
+                            <button
+                                    (click)="modal.close('Close')"
+                                    class="btn btn-sm btn-transparent-dark fw-bolder me-2"
+                                    type="button"
+                            >
+                                Cancel
+                            </button
+                            >
+                            <button
+                                    (click)="close()"
+                                    [disabled]="newCatalogue.form.invalid || number.untouched"
+                                    class="btn btn-sm fw-bolder btn-outline-primary border-0"
+                                    type="button"
+                            >
+                                Add Product
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="content-wrapper container-fluid p-0">
+  <div class="content-body">
+    <app-screen-header [icon]="'calendar'" [title]="'Holidays'">
+    </app-screen-header>
+    <div class="card content-card">
+      <div class="card-body p-0">
+        <div class="row">
+          <div class="col-3 holiday_sidebar">
+            <button class="btn btn-primary" (click)="addevent()">Add Event</button>
+            <div class="col">
+              <ngb-accordion [closeOthers]="true" activeIds="">
+                <ngb-panel id="accordion-1">
+                  <ng-template ngbPanelTitle>
+                    <span class="lead collapse-title"> Accordion Item 1 </span>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    Lorem ipsum dolor sit amet.
+                  </ng-template>
+                </ngb-panel>
+                <ngb-panel id="accordion-2">
+                  <ng-template ngbPanelTitle>
+                    <span class="lead collapse-title"> Accordion Item 2 </span>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    Lorem ipsum dolor sit.
+                  </ng-template>
+                </ngb-panel>
+                <ngb-panel id="accordion-3">
+                  <ng-template ngbPanelTitle>
+                    <span class="lead collapse-title"> Accordion Item 3 </span>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    Lorem ipsum dolor sit.
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </div>
+            <img
+              src="../../../../../assets/images/illustration/rafiki.svg"
+              alt="holidays-illustration"
+              srcset=""
+            />
+          </div>
+          <div class="col-9">
+            <full-calendar [options]="calendarOptions"></full-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <core-sidebar class="modal modal-slide-in fade event-sidebar" hideOnEsc="true" name="add-event"
+                      overlayClass="modal-backdrop">
+            <app-add-event></app-add-event>
+    </core-sidebar>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" version="1" width="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="a">
+      <path d="M125.07 0h606.3v606.3h-606.3z" fill-opacity=".67"/>
+    </clipPath>
+  </defs>
+  <path d="M.293-3764.3h49.872v8.546H.293zM0-2800500h7472800v66033H0z" fill="#0062da" fill-rule="evenodd"/>
+  <g clip-path="url(#a)" fill-rule="evenodd" stroke-width="1pt" transform="matrix(.844 0 0 .844 -105.62 0)">
+    <path d="M0 385.64h295.28v220.65H0z" fill="#fff"/>
+    <path d="M295.08 0h177.56v606.29H295.08z" fill="#0062da"/>
+    <path d="M0 220.47h1063v165.35H0z" fill="#0062da"/>
+    <path d="M0 .004h295.28v220.65H0zM472.44 385.64h590.55v220.65H472.44zM472.44.002h590.55v220.65H472.44zM0 385.64h295.28v220.65H0z" fill="#fff"/>
+    <path d="M295.08 0h177.56v606.29H295.08z" fill="#0062da"/>
+    <path d="M0 .004h295.28v220.65H0zM472.44 385.64h590.55v220.65H472.44zM472.44.002h590.55v220.65H472.44z" fill="#fff"/>
+  </g>
+</svg>

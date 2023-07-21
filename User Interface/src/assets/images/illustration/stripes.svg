@@ -1,0 +1,11 @@
+<svg id="stripes-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <defs>
+        <pattern id="svg-stripes-pattern-10455" patternTransform="rotate(45)" width="100%" height="56" x="0" y="0" patternUnits="userSpaceOnUse">
+            <g>
+                <rect x="0" y="0" width="100%" height="28" style="fill-opacity: 0;"></rect>
+                <rect x="0" y="28" width="100%" height="28" class="main_fill"></rect>
+            </g>
+        </pattern>
+    </defs>
+    <rect x="0" y="0" width="100%" height="100%" fill="url(#svg-stripes-pattern-10455)"></rect>
+</svg>

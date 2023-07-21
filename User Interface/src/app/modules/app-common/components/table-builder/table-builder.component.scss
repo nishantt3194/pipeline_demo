@@ -1,0 +1,81 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+@import '../@core/scss/angular/libs/datatables.component.scss';
+@import '../@core/scss/angular/libs/select.component.scss';
+
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row, .datatable-body, .datatable-header, .datatable-scroll {
+  min-width: 100% !important;
+}
+
+.ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+  background: #f8f7fa;
+  //border-top: none !important;
+  border-bottom: none !important;
+  cursor: pointer;
+}
+
+.dark-layout .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+.dark-layout .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+  background: #565E76;
+  //border-top: none !important;
+  border-bottom: none !important;
+  cursor: pointer;
+}
+
+.dropdown-toggle.disable-arrow::after {
+  display: none;
+}
+
+.ng-select.disable-arrow .ng-arrow-wrapper .ng-arrow {
+  display: none;
+}
+
+.ng-select .ng-select-container {
+  border: 1px solid $datatables-border-color !important;
+}
+
+.datatable-body-row:nth-child(odd) {
+  background: rgba(248, 247, 250, 0.4);
+}
+
+.dark-layout .datatable-body .datatable-body-row:nth-child(odd) {
+  background: rgba(86, 94, 118, 0.4);
+}
+
+.datatable-body-row .datatable-body-cell, .datatable-body-row .datatable-body-group-cell {
+  border-bottom: 1px solid $datatables-border-color !important;
+  font-weight: 500;
+}
+
+.dark-layout .datatable-body-row .datatable-body-cell, .dark-layout .datatable-body-row .datatable-body-group-cell {
+  border-bottom: 1px solid $datatables-dark-border-color !important;
+}
+
+.ngx-datatable.bootstrap.core-bootstrap .datatable-footer {
+  border-top: none !important;
+  padding-left: 5px !important;
+  padding-bottom: 2px !important;
+}
+
+.ngx-datatable.bootstrap.core-bootstrap .datatable-header {
+
+}
+
+.dark-layout .ngx-datatable.bootstrap.core-bootstrap .datatable-header {
+  background-color: $datatables-dark-header-bg-color;
+  border-top: 1px solid $datatables-dark-border-color;
+  color: $white;
+}
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell .datatable-header-cell-label {
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  letter-spacing: 1px !important;
+}

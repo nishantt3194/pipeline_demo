@@ -1,0 +1,134 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// ================================================================================================
+// 	File Name: semi-dark-layout.scss
+// 	Description: SCSS file for semi dark layout.
+// 	----------------------------------------------------------------------------------------------
+// 	Item Name: Future Algorithms
+// 	Author: Future Algorithms
+// 	Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+@import '../bootstrap-extended/include';
+// Bootstrap includes
+@import '../components/include'; // Components includes
+
+.semi-dark-layout {
+  /************ Main Menu **************/
+
+  // main menu
+  .main-menu {
+    background-color: $theme-dark-table-header-bg;
+
+    .shadow-bottom {
+      background: linear-gradient(
+                      180deg,
+                      $theme-dark-table-header-bg 44%,
+                      rgba($theme-dark-table-header-bg, 0.51) 73%,
+                      rgba($theme-dark-table-header-bg, 0)
+      );
+    }
+
+    &:not(.expanded) {
+      .navigation {
+        .sidebar-group-active {
+          > a {
+            background-color: $theme-dark-body-bg !important;
+          }
+        }
+      }
+    }
+  }
+
+  // main menu content
+  .main-menu-content {
+    .navigation-main {
+      background-color: $theme-dark-table-header-bg;
+
+      .navigation-header {
+        color: $theme-dark-text-muted-color;
+      }
+
+      .nav-item {
+        a {
+          color: set-navbar-text-color($theme-dark-body-color);
+        }
+
+        &.open:not(.sidebar-group-active) {
+          > a {
+            background-color: $theme-dark-body-bg;
+          }
+        }
+
+        a:after,
+        a {
+          color: set-navbar-text-color($theme-dark-body-color) !important;
+        }
+
+        .menu-content {
+          background-color: $theme-dark-table-header-bg;
+
+          .active {
+            .menu-item {
+              color: $white;
+            }
+          }
+
+          li:not(.active) {
+            a {
+              background-color: $theme-dark-table-header-bg;
+            }
+          }
+        }
+      }
+
+      .active {
+        > a {
+          color: $white !important;
+        }
+
+        .menu-title,
+        i {
+          color: $white;
+        }
+      }
+
+      .sidebar-group-active {
+        a {
+          border-radius: 4px;
+        }
+      }
+
+      .menu-content {
+        background-color: $theme-dark-table-header-bg;
+
+        .active {
+          z-index: 1;
+
+          a {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  // menu collapsed active item color
+  .menu-collapsed {
+    .main-menu:not(.expanded) {
+      .navigation-main {
+        li.active {
+          > a {
+            background: $theme-dark-body-bg !important;
+            color: $white !important;
+          }
+        }
+      }
+    }
+  }
+}

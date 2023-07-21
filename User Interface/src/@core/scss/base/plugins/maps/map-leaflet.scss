@@ -1,0 +1,48 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// ================================================================================================
+//     File Name: leaflet.scss
+//     Description: Leaflet map custom scss
+//     ----------------------------------------------------------------------------------------------
+//     Item Name: Future Algorithms
+//     Author: Future Algorithms
+//     Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+.leaflet-map {
+  height: 400px;
+  z-index: 1;
+}
+
+html[data-textdirection='rtl'] {
+  .leaflet-map {
+    .leaflet-control-container {
+      .leaflet-left {
+        left: 0;
+        right: unset;
+
+        .leaflet-control-zoom,
+        .leaflet-control-layers {
+          margin-right: 0;
+          margin-left: 10px;
+        }
+      }
+
+      .leaflet-right {
+        right: 0;
+        left: unset;
+
+        .leaflet-control-zoom,
+        .leaflet-control-layers {
+          margin-right: 10px;
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}

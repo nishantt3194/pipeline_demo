@@ -1,0 +1,59 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!-- core card component -->
+<div #coreCard *blockUI="coreCardId; templates: _CoreBlockUiComponent" [class]="classes.length > 0 ? classes.join(' ') + ' card' : 'card'" [ngClass]="{ 'card-fullscreen': onclickEvent.expandStatus }">
+  <div #cardHeader class="card-header">
+    <ng-content select=".card-title"></ng-content>
+      <!-- heading elements -->
+    <div class="heading-elements">
+      <ul class="list-inline mb-0">
+        <!-- collapse -->
+        <li (click)="collapse()" *ngIf="actionsView.collapse">
+          <a [ngClass]="{ rotate: onclickEvent.collapseStatus }" data-action="collapse">
+            <i class="feather icon-chevron-down"></i>
+          </a>
+        </li>
+        <!-- expand -->
+        <li (click)="expand()" *ngIf="actionsView.expand">
+          <a data-action="expand">
+            <i [ngClass]="onclickEvent.expandStatus ? 'icon-minimize' : 'icon-maximize'" class="feather"></i>
+          </a>
+        </li>
+        <!-- reload -->
+        <li (click)="reload()" *ngIf="actionsView.reload">
+          <a data-action="reload">
+            <i class="feather icon-rotate-cw"></i>
+          </a>
+        </li>
+        <!-- close -->
+        <li (click)="close()" *ngIf="actionsView.close">
+          <a data-action="close">
+            <i class="feather icon-x"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+      <!--/ heading elements -->
+  </div>
+  <div *ngIf="actionsView.collapse; else noCollapse" [ngbCollapse]="onclickEvent.collapseStatus" class="card-content">
+    <ng-container *ngTemplateOutlet="cardBodyOutlet"></ng-container>
+  </div>
+
+  <ng-template #noCollapse>
+    <ng-container *ngTemplateOutlet="cardBodyOutlet"></ng-container>
+  </ng-template>
+  <ng-template #cardBodyOutlet>
+    <!--? content wrapped with .card-body -->
+    <ng-content select=".card-body"></ng-content>
+
+    <!--? content without any wrapper -->
+    <ng-content></ng-content>
+  </ng-template>
+</div>
+
+<!-- /core card component -->

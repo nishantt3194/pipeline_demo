@@ -1,0 +1,18 @@
+<app-screen-header [icon]="'outline_tuning_square_2'" [title]="'Shifts'">
+</app-screen-header>
+<div class="card content-card">
+  <div class="card-body">
+    <app-table-builder
+    (view)="openShiftView($event)"
+
+      [builder]="builder"
+      [createCallback]="createShift"
+      [create]="true"
+      [enableHeaderActions]="true"
+      [headers]="headers"
+      [mode]="'builder'"
+      [search]="true"
+      
+    ></app-table-builder>
+  </div>
+</div>

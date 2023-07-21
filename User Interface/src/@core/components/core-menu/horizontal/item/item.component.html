@@ -1,0 +1,23 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<ng-container *ngIf="!item.hidden">
+  <!-- item.url -->
+  <a *ngIf="item.url && !item.externalUrl" [ngClass]="item.classes" [routerLink]="[item.url]" [target]="item.openInNewTab ? '_blank' : '_self'" class="dropdown-item d-flex align-items-center">
+    <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+  </a>
+
+  <!-- item.externalUrl -->
+  <a *ngIf="item.url && item.externalUrl" [href]="item.url" [ngClass]="item.classes" [target]="item.openInNewTab ? '_blank' : '_self'" class="dropdown-item d-flex align-items-center">
+    <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+  </a>
+
+  <ng-template #itemContent>
+    <span *ngIf="item.icon" [data-feather]="item.icon"></span>
+    <span [translate]="item.translate">{{ item.title }}</span>
+  </ng-template>
+</ng-container>

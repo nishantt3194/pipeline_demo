@@ -1,0 +1,98 @@
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <app-screen-header [icon]="'oee'" [title]="'Entry'">
+        </app-screen-header>
+
+        <section class="horizontal-wizard mt-n4">
+            <div #wizard_stepper class="bs-stepper horizontal-wizard-example d-flex flex-column position-relative"
+                 id="test-stepper"
+                 style="min-height: 78vh;border-top-left-radius: 0;border-top-right-radius: 0;">
+
+                <div *ngIf="loading" class="position-absolute"
+                     style="background-color: rgba(255,255,255, 0.7); z-index: 100; top: 0; bottom: 0; left: 0; right: 0;">
+                    <div class="position-relative d-flex flex-column align-items-stretch justify-content-start h-100 w-100">
+                        <ngb-progressbar [animated]="true" [striped]="true" [value]="100"
+                                         class="w-100 rounded-0" style="border-radius: 0" type="secondary"></ngb-progressbar>
+                    </div>
+                </div>
+
+                <div class="bs-stepper-header justify-content-evenly">
+                    <div class="step" data-target="#details">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">1</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Basic Details</span>
+                                <span class="bs-stepper-subtitle">Provide basic machine</span>
+                              </span>
+                        </button>
+                    </div>
+                    <div class="line">
+                        <i class="font-medium-2" data-feather="chevron-right"></i>
+                    </div>
+
+                    <div class="step" data-target="#downtimes">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">2</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Downtimes</span>
+                                <span class="bs-stepper-subtitle">Add Downtimes shift</span>
+                              </span>
+                        </button>
+                    </div>
+                    <div class="line">
+                        <i class="font-medium-2" data-feather="chevron-right"></i>
+                    </div>
+
+                    <div class="step" data-target="#production">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">3</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Production</span>
+                                <span class="bs-stepper-subtitle">Add Production shift</span>
+                              </span>
+                        </button>
+                    </div>
+                    <div class="line">
+                        <i class="font-medium-2" data-feather="chevron-right"></i>
+                    </div>
+
+                    <div class="step" data-target="#remarks">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">4</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Remarks &amp; Submit</span>
+                                <span class="bs-stepper-subtitle">Remarks and submit</span>
+                              </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content col">
+                    <form class="h-100">
+                        <div class="content h-100" id="details">
+                            <app-details #details [isNew]="isNew" [save]="save" [stepperNext]="next"></app-details>
+                        </div>
+                        <div class="content h-100" id="downtimes">
+                            <app-downtimes #downtimes [save]="save" [stepperNext]="next" [stepperPrevious]="prev"></app-downtimes>
+                        </div>
+                        <div class="content h-100" id="production">
+                            <app-production #production [save]="save" [stepperNext]="next" [stepperPrevious]="prev"></app-production>
+                        </div>
+                        <div class="content h-100" id="remarks">
+                            <app-remarks #remarks [save]="save" [submit]="submit" [stepperPrevious]="prev"></app-remarks>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <core-sidebar class="modal modal-slide-in fade event-sidebar" hideOnEsc="true" name="add-downtime"
+                      overlayClass="modal-backdrop">
+            <app-add-downtime></app-add-downtime>
+        </core-sidebar>
+        <core-sidebar class="modal modal-slide-in fade event-sidebar" hideOnEsc="true" name="add-precheck"
+                      overlayClass="modal-backdrop">
+            <app-add-prechecks></app-add-prechecks>
+        </core-sidebar>
+
+    </div>
+</div>

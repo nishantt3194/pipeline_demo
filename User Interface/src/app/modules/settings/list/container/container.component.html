@@ -1,0 +1,65 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <div class="row match-height mb-2">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="bg-primary-striped card position-relative">
+                    <div class="row p-4">
+                        <div class="col-12  d-flex flex-column align-items-start justify-content-center">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="p-1"><span [data-icon]="'outline_settings_settings_minimalistic'"
+                                                       class="font-large-5"></span></div>
+                                <span class="font-large-3 ml-1 font-weight-extra-bold">Settings</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shadow-primary card mb-0 position-absolute border-0 d-flex flex-row justify-content-start align-items-end px-2"
+                         style="left: 32px;right:32px; height: 64px; bottom: -32px;">
+                        <ul #tabBar="ngbNav" class="nav-tabs mb-0 h-100" ngbNav>
+
+                            <li ngbNavItem>
+                                <a ngbNavLink>
+                                    <span [data-icon]="'outline_essential_check_square'" class="font-small-2"></span>
+                                    <span class="font-medium-4 font-weight-bolder ml-1">Shifts</span></a>
+                                <ng-template ngbNavContent>
+                                    <app-shifts></app-shifts>
+                                </ng-template>
+                            </li>
+                            <li ngbNavItem>
+                                <a ngbNavLink>
+                                    <span [data-icon]="'outline_essential_check_square'" class="font-small-2"></span>
+                                    <span class="font-medium-4 font-weight-bolder ml-1">Downtimes</span></a>
+                                <ng-template ngbNavContent>
+                                    <app-downtimes></app-downtimes>
+                                </ng-template>
+                            </li>
+
+                            <li ngbNavItem>
+                                <a ngbNavLink>
+                                    <span [data-icon]="'outline_essential_danger_square'" class="font-small-2"></span>
+                                    <span class="font-medium-4 font-weight-bolder ml-1">Areas</span></a>
+                                <ng-template ngbNavContent>
+                                    <app-areas></app-areas>
+                                </ng-template>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div [ngbNavOutlet]="tabBar"></div>
+            </div>
+        </div>
+    </div>
+</div>

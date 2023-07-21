@@ -1,0 +1,59 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <app-screen-header [icon]="'outline_users_group_rounded'" [title]="'Users'">
+            <div class="card mb-0 shadow-primary header-tab-bar px-2" tab-bar>
+                <ul #tabBar="ngbNav" class="nav-tabs mb-0 h-100" ngbNav>
+                    <li ngbNavItem *ngIf="currentUser == 'ADMINISTRATOR' ">
+                        <a ngbNavLink>
+                            <span [data-icon]="'outline_essential_check_square'" class="font-small-2"></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1">Supervisor</span></a>
+                        <ng-template ngbNavContent>
+                            <app-supervisor></app-supervisor>
+                        </ng-template>
+                    </li>
+
+                    <li ngbNavItem >
+                        <a ngbNavLink>
+                            <span [data-icon]="'outline_essential_danger_square'" class="font-small-2"></span>
+                            <span class="font-medium-4 font-weight-bolder ml-1">Operator</span></a>
+                        <ng-template ngbNavContent>
+                            <app-operator></app-operator>
+                        </ng-template>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row" tag>
+                <div class="col-6">
+                    <div class="card mb-0 shadow-primary">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-end">
+                            <span class="font-weight-extra-bold font-large-2">56</span>
+                            <span class="font-medium-1">Supervisors</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card mb-0 shadow-primary">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-end">
+                            <span class="font-weight-extra-bold font-large-2">72</span>
+                            <span class="font-medium-1">Operators</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </app-screen-header>
+
+        <div class="row">
+            <div class="col-12">
+                <div [ngbNavOutlet]="tabBar"></div>
+            </div>
+        </div>
+    </div>
+</div>

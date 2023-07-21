@@ -1,0 +1,12 @@
+<div class="card content-card">
+    <div class="card-body">
+        <app-table-builder
+                [builderArgs]="{'status':false}"
+                [builder]="builder"
+                [headers]="headers"
+                [mode]="'builder'"
+                [search]="true"
+                (view)="openMachineView($event)"
+        ></app-table-builder>
+    </div>
+</div>

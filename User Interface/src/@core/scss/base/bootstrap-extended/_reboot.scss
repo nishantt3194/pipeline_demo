@@ -1,0 +1,22 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+a {
+  &:focus {
+    outline: none;
+  }
+}
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+
+  @include hover() {
+    color: inherit;
+    text-decoration: none;
+  }
+}

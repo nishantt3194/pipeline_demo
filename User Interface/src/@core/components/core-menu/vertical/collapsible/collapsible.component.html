@@ -1,0 +1,35 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<ng-container *ngIf="!item.hidden">
+  <!-- collapsible title -->
+  <a (click)="toggleOpen($event)" *ngIf="!item.url" [ngClass]="item.classes" class="d-flex align-items-center">
+    <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+  </a>
+
+  <!-- itemContent templates -->
+  <ng-template #itemContent>
+    <span *ngIf="item.icon" [data-feather]="item.icon"></span>
+    <span [translate]="item.translate" class="menu-title text-truncate">{{ item.title }}</span>
+    <span *ngIf="item.badge" [ngClass]="item.badge.classes" [translate]="item.badge.translate" class="badge ml-auto mr-1">
+      {{ item.badge.title }}
+    </span>
+  </ng-template>
+
+  <!-- sub-menu item/collapsible -->
+  <ul class="menu-content">
+    <ng-container *ngFor="let item of item.children">
+      <!-- item -->
+      <li *ngIf="item.type == 'item'" [item]="item" [ngClass]="{ disabled: item.disabled === true }" [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
+          [routerLinkActive]="!item.openInNewTab ? 'active' : ''" core-menu-vertical-item>
+        <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
+      </li>
+      <!-- collapsible -->
+      <li *ngIf="item.type == 'collapsible'" [item]="item" class="nav-item has-sub" core-menu-vertical-collapsible></li>
+    </ng-container>
+  </ul>
+</ng-container>

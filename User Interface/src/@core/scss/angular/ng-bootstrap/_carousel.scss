@@ -1,0 +1,27 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+// carousel
+
+.carousel {
+  outline: none;
+}
+
+// carousel fade animation
+.carousel-fade {
+  .carousel-item {
+    transition: opacity 1.7s ease !important;
+    position: absolute !important;
+    display: block !important;
+    opacity: 0;
+  }
+
+  .carousel-item.active {
+    position: relative !important;
+    opacity: 1;
+  }
+}

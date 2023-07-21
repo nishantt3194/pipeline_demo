@@ -1,0 +1,13 @@
+<div class="card content-card">
+  <div class="card-body">
+    <app-table-builder
+      (view)="openEntryView($event)"
+      [data]="data"
+      [headers]="headers"
+      [mode]="'data'"
+      [search]="true"
+      [addDetailPane]="true"
+      [detailHeight]="750"
+    ></app-table-builder>
+  </div>
+</div>

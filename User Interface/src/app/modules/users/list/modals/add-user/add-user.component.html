@@ -1,0 +1,159 @@
+<div class="modal-body px-0">
+  <div class="container">
+    <div class="row mb-2">
+      <div
+        class="col-lg-12 text-center font-large-1 font-weight-extra-bold text-black-50"
+      >
+        New User
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-lg-12">
+        <form #newUser="ngForm" id="newUser">
+          <div class="row mb-1 px-3">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Enter Email"
+                  type="text"
+                  [(ngModel)]="userRef.email"
+                  #email="ngModel"
+                  required
+                /><span
+                  *ngIf="(newUser.submitted || email.touched) && email.invalid"
+                  class="invalid-form"
+                >
+                  <small
+                    *ngIf="email.errors.required"
+                    class="form-text text-danger"
+                  >
+                    Email is required!</small
+                  >
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  id="gid"
+                  name="gid"
+                  placeholder="Enter GID"
+                  type="text"
+                  [(ngModel)]="userRef.gid"
+                  #gid="ngModel"
+                />
+                <span
+                  *ngIf="(newUser.submitted || gid.touched) && gid.invalid"
+                  class="invalid-form"
+                >
+                  <small
+                    *ngIf="gid.errors.required"
+                    class="form-text text-danger"
+                  >
+                    GID Number is required!</small
+                  >
+                </span>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="form-group">
+                <ng-select
+                  class="form-select"
+                  id="role"
+                  bindLabel="label"
+                  bindValue="identifier"
+                  [(ngModel)]="userRef.role"
+                  #role="ngModel"
+                  name="role"
+                  required
+                  [items]="roles"
+                  placeholder="Select Role"
+                >
+                  <ng-template let-item="item" ng-label-tmp ng-option-tmp>
+                    {{ item.label }}
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Enter First Name"
+                  type="text"
+                  [(ngModel)]="userRef.firstName"
+                  #firstName="ngModel"
+                  required
+                /><span
+                  *ngIf="
+                    (newUser.submitted || firstName.touched) &&
+                    firstName.invalid
+                  "
+                  class="invalid-form"
+                >
+                  <small
+                    *ngIf="firstName.errors.required"
+                    class="form-text text-danger"
+                  >
+                    First Name is required!</small
+                  >
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Enter Last Name"
+                  type="text"
+                  [(ngModel)]="userRef.lastName"
+                  #lastName="ngModel"
+                  required
+                /><span
+                  *ngIf="
+                    (newUser.submitted || lastName.touched) && lastName.invalid
+                  "
+                  class="invalid-form"
+                >
+                  <small
+                    *ngIf="lastName.errors.required"
+                    class="form-text text-danger"
+                  >
+                    Last Name is required!</small
+                  >
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row mb-1 px-3">
+      <div
+        class="col-lg-12 d-flex justify-content-end align-item-end float-right"
+      >
+
+        <button
+          (click)="save()"
+          class="btn btn-primary btn-next w-100"
+          rippleEffect
+          type="submit"
+          form="dataForm"
+        >
+          <span class="align-middle d-sm-inline-block d-none">Create User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

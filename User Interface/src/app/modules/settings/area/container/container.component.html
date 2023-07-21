@@ -1,0 +1,24 @@
+<div class="content-wrapper container-fluid p-0">
+    <div class="content-body">
+        <app-screen-header [icon]="'map'" [title]="'Area'">
+            <div class="card mb-0 shadow-primary" tag>
+                <div class="card-body d-flex flex-column justify-content-center align-items-end">
+                  <span *ngIf="areaCount < 0" class="py-2">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                    </span>
+                    <span *ngIf="areaCount >= 0" class="font-weight-extra-bold font-large-3">{{ areaCount }}</span>
+                </div>
+            </div>
+        </app-screen-header>
+
+        <div class="card content-card">
+            <div class="card-body">
+                <app-table-builder [builder]="builder" [createCallback]="createArea" [create]="true"
+                                   [enableHeaderActions]="true" [headers]="headers" [mode]="'builder'"
+                                   [search]="true"></app-table-builder>
+            </div>
+        </div>
+    </div>
+</div>

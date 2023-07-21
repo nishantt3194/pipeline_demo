@@ -1,0 +1,14 @@
+<div class="card content-card">
+    <div class="card-body">
+        <app-table-builder
+                (view)="openProductView()"
+                [builder]="builder"
+                [createCallback]="openNewProductDialog"
+                [create]="true"
+                [enableHeaderActions]="true"
+                [headers]="headers"
+                [mode]="'builder'"
+                [search]="true"
+        ></app-table-builder>
+    </div>
+</div>

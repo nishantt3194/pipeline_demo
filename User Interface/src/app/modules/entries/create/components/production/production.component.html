@@ -1,0 +1,119 @@
+<form #quanititesForm="ngForm" class="container-fluid h-100 d-flex flex-column">
+    <div class="col container-fluid px-5 d-flex flex-column justify-content-center">
+        <div class="row">
+            <div class="col-12 mb-1 font-weight-extra-bold font-medium-5 text-primary">Productions</div>
+
+            <form class="col-12 d-flex justify-content-center align-items-center">
+                <div *ngFor="let prod of productionForm; let i = index;" @heightIn class="card rounded-lg mx-1 flex-wrap"
+                     style="flex: 1;min-width: 25%;">
+                    <div class="card-body d-flex flex-column justify-content-between align-items-stretch">
+                        <div class="d-flex justify-content-start mb-3">
+                            <span *ngIf="prod.template.sign === 'ADD'"
+                                  class="font-weight-bolder text-success font-medium-3">{{ '+' }}</span>
+                            <span *ngIf="prod.template.sign === 'SUB'"
+                                  class="font-weight-bolder text-danger font-medium-3">{{ '-' }}</span>
+                            <span *ngIf="prod.template.sign === 'NONE'"
+                                  class="font-weight-bolder text-warning font-medium-3">{{ 'o' }}</span>
+                            <span class="ml-1 font-weight-bolder font-medium-3">{{ prod.template.description }}</span>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group input-group-lg input-group-merge">
+                                <input [placeholder]="prod.template.description" [ngModel]="prod.value"
+                                       name="value{{ i }}" required
+                                       class="form-control" type="number" min="0" (ngModelChange)="calculateFinalProductionValue($event, i)" />
+                                <div *ngIf="prod.template.operation === 'MULTIPLY'" class="input-group-append">
+                                    <span class="input-group-text">x {{ prod.template.operand }}</span>
+                                </div>
+                                <div *ngIf="prod.template.operation === 'DIVIDE'" class="input-group-append">
+                                    <span class="input-group-text">/ {{ prod.template.operand }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center px-1 my-1">
+                            <span class="font-weight-bolder"></span>
+                            <span class="font-weight-bolder">{{ prod.calculatedValue ? prod.calculatedValue : '--' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-1 font-weight-extra-bold font-medium-5 text-primary">Rejections</div>
+            <form class="col-12 d-flex justify-content-center align-items-center">
+                <div *ngFor="let rej of rejectionForm; let i = index;" @heightIn class="card rounded-lg mx-1 flex-wrap"
+                     style="flex: 1;min-width: 25%;">
+                    <div class="card-body d-flex flex-column justify-content-between align-items-stretch">
+                        <div class="d-flex justify-content-start mb-3">
+                            <span *ngIf="rej.template.sign === 'ADD'"
+                                  class="font-weight-bolder text-success font-medium-3">{{ '+' }}</span>
+                            <span *ngIf="rej.template.sign === 'SUB'"
+                                  class="font-weight-bolder text-danger font-medium-3">{{ '-' }}</span>
+                            <span *ngIf="rej.template.sign === 'NONE'"
+                                  class="font-weight-bolder text-warning font-medium-3">{{ 'o' }}</span>
+                            <span class="ml-1 font-weight-bolder font-medium-3">{{ rej.template.description }}</span>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group input-group-lg input-group-merge">
+                                <input [placeholder]="rej.template.description" class="form-control"
+                                       [ngModel]="rej.value" name="value{{ i }}"
+                                       type="number" min="0" (ngModelChange)="calculateFinalRejectionValue($event, i)" required />
+                                <div *ngIf="rej.template.operation === 'MULTIPLY'" class="input-group-append">
+                                    <span class="input-group-text">x {{ rej.template.operand }}</span>
+                                </div>
+                                <div *ngIf="rej.template.operation === 'DIVIDE'" class="input-group-append">
+                                    <span class="input-group-text">/ {{ rej.template.operand }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center px-1 my-1">
+                            <span class="font-weight-bolder"></span>
+                            <!-- <span class="font-weight-bolder">{{ rej.calculatedValue ? rej.calculatedValue : '--' }}</span> -->
+                            <span class="font-weight-bolder">{{ rej.template.operation==="DIVIDE" && rej.calculatedValue? (rej.calculatedValue*1000 |  number: '1.0-0') : (rej.calculatedValue ? rej.calculatedValue : '--' )}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div>
+            <div class="d-flex justify-content-between align-items-end px-1 my-1 font-medium-3 font-weight-bolder">
+                <p>{{prodTitle?prodTitle+' : '+goodProduction:''}}</p>
+                <p *ngIf="rejTitleShow">{{rejTitle+" : "+totalRejection}}</p>
+                <p *ngIf="rejTitleShow">{{"Rejection Percent : "+rejectionPercentage+'%'}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="mt-2 d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-start align-items-center">
+                    <button *ngIf="isNotEdit" class="btn btn-secondary" rippleEffect (click)="saveEntry(quanititesForm)">
+                        <span [data-icon]="'save'" class="mr-1 font-medium-1"></span><span
+                            class="text-default">Save</span>
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-end align-items-center">
+                    <button (click)="prev()"
+                            class="btn btn-flat-secondary btn-prev mr-1"
+                            rippleEffect>
+                        <i class="align-middle mr-sm-25 mr-0" data-feather="chevron-left"></i>
+                        <span class="align-middle d-sm-inline-block d-none ml-sm-1">Previous</span>
+                    </button>
+                    <button (click)="next(quanititesForm)"
+                            class="btn btn-secondary btn-next"
+                            rippleEffect
+                            type="submit">
+                        <span class="align-middle d-sm-inline-block d-none mr-sm-2 text-default">Next</span>
+                        <i class="align-middle text-default" data-feather="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

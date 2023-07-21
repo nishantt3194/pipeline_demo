@@ -1,0 +1,29 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div [ngClass]="{ 'touchspin-sm': size == 'sm', 'touchspin-lg': size == 'lg' }" class="btn-group touchspin-wrapper">
+  <button (click)="decrement()" [disabled]="disabledValueDecrement" [ngClass]="{
+      'btn-info': color == 'info',
+      'btn-warning': color == 'warning',
+      'btn-success': color == 'success',
+      'btn-danger': color == 'danger'
+    }" class="btn btn-sm btn-primary btn-touchspin btn-touchspin-down">
+    <span *ngIf="!iconChevron" data-feather="minus"></span>
+    <span *ngIf="iconChevron" data-feather="chevron-down"></span>
+  </button>
+  <input (input)="inputChange($event.target.value)" [(ngModel)]="numberValue" [disabled]="disabledValue" [max]="maxValue" [min]="minValue" [step]="stepValue" class="form-control" maxlength="4"
+         pattern="\d*" type="number" value="{{ numberValue }}"/>
+  <button (click)="increment()" [disabled]="disabledValueIncrement" [ngClass]="{
+      'btn-info': color == 'info',
+      'btn-warning': color == 'warning',
+      'btn-success': color == 'success',
+      'btn-danger': color == 'danger'
+    }" class="btn btn-sm btn-primary btn-touchspin btn-touchspin-up">
+    <span *ngIf="!iconChevron" data-feather="plus"></span>
+    <span *ngIf="iconChevron" data-feather="chevron-up"></span>
+  </button>
+</div>

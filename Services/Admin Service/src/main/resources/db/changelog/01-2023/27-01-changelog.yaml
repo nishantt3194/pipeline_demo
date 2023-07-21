@@ -1,0 +1,264 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1679922222554-9
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: area
+                  type: BINARY(16)
+              - column:
+                  name: reason
+                  type: BINARY(16)
+              - column:
+                  name: time
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BINARY(16)
+            tableName: pre_check_buffer
+  - changeSet:
+      id: 1679922222554-10
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: template
+                  type: BINARY(16)
+            tableName: staged_template
+  - changeSet:
+      id: 1679922222554-11
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: manual_category
+                  type: BINARY(16)
+            tableName: staged_breakdown
+  - changeSet:
+      id: 1679922222554-12
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: prompt
+                  type: VARCHAR(200 BYTE)
+            tableName: category_requirement
+  - changeSet:
+      id: 1679922222554-22
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: area
+            baseTableName: pre_check_buffer
+            constraintName: pre_check_buffer_area_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: area
+        - createIndex:
+            columns:
+              - column:
+                  name: area
+            indexName: pre_check_buffer_area_id_fk
+            tableName: pre_check_buffer
+  - changeSet:
+      id: 1679922222554-23
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: reason
+            baseTableName: pre_check_buffer
+            constraintName: pre_check_buffer_reason_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: reason
+        - createIndex:
+            columns:
+              - column:
+                  name: reason
+            indexName: pre_check_buffer_reason_id_fk
+            tableName: pre_check_buffer
+  - changeSet:
+      id: 1679922222554-24
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: reason
+            baseTableName: staged_breakdown
+            constraintName: staged_breakdown_reason_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: reason
+        - createIndex:
+            columns:
+              - column:
+                  name: reason
+            indexName: staged_breakdown_reason_id_fk
+            tableName: staged_breakdown
+  - changeSet:
+      id: 1679922222554-25
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: area
+            baseTableName: staged_entry
+            constraintName: staged_entry_area_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: area
+        - createIndex:
+            columns:
+              - column:
+                  name: area
+            indexName: staged_entry_area_id_fk
+            tableName: staged_entry
+  - changeSet:
+      id: 1679922222554-26
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: machine
+            baseTableName: staged_entry
+            constraintName: staged_entry_machine_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: machine
+        - createIndex:
+            columns:
+              - column:
+                  name: machine
+            indexName: staged_entry_machine_id_fk
+            tableName: staged_entry
+  - changeSet:
+      id: 1679922222554-27
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: product
+            baseTableName: staged_entry
+            constraintName: staged_entry_product_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: product
+        - createIndex:
+            columns:
+              - column:
+                  name: product
+            indexName: staged_entry_product_id_fk
+            tableName: staged_entry
+  - changeSet:
+      id: 1679922222554-28
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: shift
+            baseTableName: staged_entry
+            constraintName: staged_entry_shift_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: shift
+        - createIndex:
+            columns:
+              - column:
+                  name: shift
+            indexName: staged_entry_shift_id_fk
+            tableName: staged_entry
+  - changeSet:
+      id: 1679922222554-29
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: operator
+            baseTableName: staged_entry
+            constraintName: staged_entry_users_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: users
+        - createIndex:
+            columns:
+              - column:
+                  name: operator
+            indexName: staged_entry_users_id_fk
+            tableName: staged_entry
+  - changeSet:
+      id: 1679922222554-30
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: template
+            baseTableName: staged_template
+            constraintName: staged_template_template_id_fk
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: template
+        - createIndex:
+            columns:
+              - column:
+                  name: template
+            indexName: staged_template_template_id_fk
+            tableName: staged_template
+  - changeSet:
+      id: 1679922222554-7
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createView:
+            fullDefinition: false
+            replaceIfExists: true
+            selectQuery: select uuid_to_bin(uuid()) AS `id`,`o`.`users` AS `user`,`a`.`id`
+              AS `area` from ((`DEV_DATA_STORE`.`operators` `o` join `DEV_DATA_STORE`.`machine`
+              `m` on((`m`.`id` = `o`.`machine`))) join `DEV_DATA_STORE`.`area` `a` on((`m`.`area`
+              = `a`.`id`))) group by `o`.`users`,`a`.`id`
+            viewName: user_area_association
+  - changeSet:
+      id: 1679922222554-8
+      author: dell (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createView:
+            fullDefinition: false
+            replaceIfExists: true
+            selectQuery: select uuid_to_bin(uuid()) AS `id`,`e`.`id` AS `entry`,true AS
+              `status`,`e`.`machine` AS `machine`,`e`.`shift_date` AS `shift_date`,`e`.`shift`
+              AS `shift`,`a`.`id` AS `area`,`c`.`id` AS `category`,sum(`d`.`time`) AS
+              `time`,`e`.`total_production` AS `total_production`,`e`.`total_rejection`
+              AS `total_rejection`,`e`.`good_production` AS `good_production`,`e`.`created_on`
+              AS `created_on`,`e`.`updated_on` AS `updated_on`,`e`.`created_by` AS `created_by`,`e`.`updated_by`
+              AS `updated_by`,`e`.`deleted_on` AS `deleted_on`,`e`.`deleted_by` AS `deleted_by`,0
+              AS `version` from ((((`DEV_DATA_STORE`.`downtime` `d` join `DEV_DATA_STORE`.`category`
+              `c` on((`c`.`id` = `d`.`runtime_category`))) join `DEV_DATA_STORE`.`entry`
+              `e` on((`d`.`entry` = `e`.`id`))) join `DEV_DATA_STORE`.`shift` `s` on((`e`.`shift`
+              = `s`.`id`))) join `DEV_DATA_STORE`.`area` `a` on((`s`.`area` = `a`.`id`)))
+              group by `d`.`entry`,`d`.`runtime_category` having (`d`.`runtime_category`
+              is not null)
+            viewName: zll_report
+

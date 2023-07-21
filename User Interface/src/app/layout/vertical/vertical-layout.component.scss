@@ -1,0 +1,46 @@
+/*!******************************************************************************
+ * Future Algorithms Private Limited
+ * Copyright 2022 Future Algorithms Private Limited.
+ * Unauthorized copying of any files, via any medium is strictly prohibited.
+ * All Rights Reserved.
+ ******************************************************************************/
+
+@import '@core/scss/base/core/menu/menu-types/vertical-menu.scss';
+@import '@core/scss/base/core/menu/menu-types/vertical-overlay-menu.scss';
+
+.user-footer {
+  position: sticky;
+  z-index: 2;
+  bottom: 18px;
+  border-radius: 1.2rem;
+  height: 64px;
+  padding: 0.76rem;
+  background-color: $body-bg;
+
+  .user-name {
+    color: $text-color;
+    width: 164px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: none;
+  }
+
+  .footer-panel-menu {
+    padding: 0.2rem;
+    display: none;
+  }
+}
+
+.main-menu.expanded {
+  .user-footer {
+    * {
+      display: inherit;
+    }
+
+    .user-name {
+      display: block !important;
+    }
+  }
+}
+

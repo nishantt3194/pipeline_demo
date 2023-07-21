@@ -1,0 +1,135 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<div class="content-wrapper container-fluid p-0">
+  <div class="content-body">
+    <app-screen-header
+      [icon]="'outline_transport_spedometer_max'"
+      [subtitle]="ref.area"
+      [title]="ref.name"
+    >
+      <div class="card mb-0 shadow-primary header-tab-bar px-2" tab-bar>
+        <ul
+          #tabBar="ngbNav"
+          class="nav-tabs mb-0 h-100"
+          [(activeId)]="currentTab"
+          ngbNav
+        >
+          <li [ngbNavItem]="'overview'">
+            <a ngbNavLink
+              ><span [class]="'mr-1'" [data-feather]="'user'"></span>Overview</a
+            >
+            <ng-template ngbNavContent>
+              <app-machine-overview></app-machine-overview>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="'analysis'">
+            <a ngbNavLink
+              ><span [class]="'mr-1'" [data-feather]="'archive'"></span
+              >Analysis</a
+            >
+            <ng-template ngbNavContent>
+              <app-analysis [name]="ref.name"></app-analysis>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="'machine-logs'">
+            <a ngbNavLink
+              ><span [class]="'mr-1'" [data-feather]="'archive'"></span>Shifts
+              History</a
+            >
+            <ng-template ngbNavContent>
+              <app-shifts-history
+                [start]="start"
+                [end]="end"
+              ></app-shifts-history>
+            </ng-template>
+          </li>
+         
+        </ul>
+      </div>
+      <div class="card mb-0 shadow-primary" tag>
+        <div
+          *ngIf="currentTab == 'overview'"
+          class="card-body"
+        >
+          <div class="row">
+            <div class="col-4 d-flex flex-column justify-content-center align-items-end">
+              <button
+                class="btn btn-flat-primary text-nowrap flex-grow-0 mt-1 "
+                rippleEffect
+                *ngIf="currentUser == 'ADMINISTRATOR'"
+                (click)="edit()"
+              >
+                <i data-feather="edit"></i>
+              </button>
+              
+            </div>
+            <div class="col-8 d-flex flex-column justify-content-center align-items-end">
+              <span class="font-weight-extra-bold text-primary font-large-2"
+                >Active</span
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="currentTab == 'analysis'"
+          class="card-body"
+        >
+          <div class="row">
+            <div class="col-4 d-flex flex-column justify-content-center align-items-end">
+              
+              
+            </div>
+            <div class="col-8 d-flex flex-column justify-content-center align-items-end">
+              <span class="font-weight-extra-bold text-primary font-large-2"
+                >Active</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="currentTab == 'machine-logs'"
+          class="card-body d-flex flex-column justify-content-center align-items-stretch"
+        >
+          <div
+            class="input-group w-100 d-flex justify-content-between align-items-center"
+          >
+            <ng2-flatpickr
+              id="schedule_range"
+              class="flex-grow-1"
+              [ngModel]="[start, end]"
+              placeholder="Select Dates"
+              #schedule_range="ngModel"
+              #picker
+              (ngModelChange)="setDates($event)"
+              [ngModelOptions]="{ standalone: true }"
+              [config]="rangeOptions"
+            ></ng2-flatpickr>
+
+            <span class="input-group-append">
+              <button
+                class="btn btn-secondary"
+                (click)="picker.flatpickr.toggle()"
+              >
+                <span [data-feather]="'calendar'"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </app-screen-header>
+
+    <div class="row">
+      <div class="col-12">
+        <div [ngbNavOutlet]="tabBar"></div>
+      </div>
+    </div>
+  </div>
+</div>

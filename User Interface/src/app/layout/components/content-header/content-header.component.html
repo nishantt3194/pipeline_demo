@@ -1,0 +1,48 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!-- app-content-header start -->
+<ng-container *ngIf="contentHeader">
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12 d-flex">
+                    <h2 class="content-header-title font-weight-extra-bold float-left mb-0">
+                        {{ contentHeader.headerTitle }}
+                    </h2>
+                    <!-- app-breadcrumb component -->
+                    <app-breadcrumb [breadcrumb]="contentHeader.breadcrumb"></app-breadcrumb>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="contentHeader.actionButton">
+            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                <div class="form-group breadcrum-right">
+                    <div ngbDropdown>
+                        <button class="btn-icon btn btn-primary btn-round btn-sm" id="dropdownSettings"
+                                ngbDropdownToggle rippleEffect type="button">
+                            <span [data-feather]="'grid'"></span>
+                        </button>
+                        <div aria-labelledby="dropdownSettings" ngbDropdownMenu>
+                            <a [routerLink]="['/']" ngbDropdownItem><span [class]="'mr-50'"
+                                                                          [data-feather]="'check-square'"></span>
+                                Todo</a>
+                            <a [routerLink]="['/']" ngbDropdownItem><span [class]="'mr-50'"
+                                                                          [data-feather]="'message-square'"></span> Chat</a>
+                            <a [routerLink]="['/']" ngbDropdownItem><span [class]="'mr-50'"
+                                                                          [data-feather]="'mail'"></span> Email</a>
+                            <a [routerLink]="['/']" ngbDropdownItem><span [class]="'mr-50'"
+                                                                          [data-feather]="'calendar'"></span>
+                                Calendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
+<!-- app-content-header end -->

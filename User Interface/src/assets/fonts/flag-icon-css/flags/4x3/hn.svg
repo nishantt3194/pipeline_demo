@@ -1,0 +1,18 @@
+<svg height="480" version="1" viewBox="0 0 512 512" width="640" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M-85.333 0h682.667v512H-85.333z" fill="#0073cf"/>
+  <path d="M-85.333 170.667h682.667v170.667H-85.333z" fill="#fff"/>
+  <g fill="#0073cf" id="c" transform="matrix(28.44444 0 0 28.44444 256 256)">
+    <g id="b">
+      <path d="M-.31-.05l.477.156L0-1z" id="a"/>
+      <use height="100%" transform="scale(-1 1)" width="100%" xlink:href="#a"/>
+    </g>
+    <use height="100%" transform="rotate(72)" width="100%" xlink:href="#b"/>
+    <use height="100%" transform="rotate(-72)" width="100%" xlink:href="#b"/>
+    <use height="100%" transform="rotate(144)" width="100%" xlink:href="#b"/>
+    <use height="100%" transform="rotate(-144)" width="100%" xlink:href="#b"/>
+  </g>
+  <use height="100%" transform="translate(142.222 -45.51)" width="100%" xlink:href="#c"/>
+  <use height="100%" transform="translate(142.222 39.822)" width="100%" xlink:href="#c"/>
+  <use height="100%" transform="translate(-142.222 -45.51)" width="100%" xlink:href="#c"/>
+  <use height="100%" transform="translate(-142.222 39.822)" width="100%" xlink:href="#c"/>
+</svg>

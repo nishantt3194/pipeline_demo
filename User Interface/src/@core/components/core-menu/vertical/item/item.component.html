@@ -1,0 +1,27 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Future Algorithms Private Limited
+  Copyright 2022 Future Algorithms Private Limited.
+  Unauthorized copying of any files, via any medium is strictly prohibited.
+  All Rights Reserved.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<ng-container *ngIf="!item.hidden">
+  <!-- item with router url -->
+  <a *ngIf="item.url && !item.externalUrl" [ngClass]="item.classes" [routerLink]="[item.url]" [target]="item.openInNewTab ? '_blank' : '_self'" class="d-flex align-items-center">
+    <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+  </a>
+
+  <!-- item with external url -->
+  <a *ngIf="item.url && item.externalUrl" [href]="item.url" [ngClass]="item.classes" [target]="item.openInNewTab ? '_blank' : '_self'" class="d-flex align-items-center">
+    <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+  </a>
+
+  <ng-template #itemContent>
+    <span *ngIf="item.icon && !item.customIcon" [data-feather]="item.icon"></span>
+      <span *ngIf="item.icon && item.customIcon && item.customIcon === true" [data-icon]="item.icon"></span>
+    <span [translate]="item.translate" class="menu-title text-truncate">{{ item.title }}</span>
+    <span *ngIf="item.badge" [ngClass]="item.badge.classes" [translate]="item.badge.translate" class="badge ml-auto mr-1">
+      {{ item.badge.title }}
+    </span>
+  </ng-template>
+</ng-container>

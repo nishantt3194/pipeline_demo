@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg height="512" id="islenskifaninn" version="1" width="512" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" y="0">
+ <metadata id="metadata3107">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+  <dc:format>image/svg+xml</dc:format>
+  <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs id="defs380">
+  <clipPath clipPathUnits="userSpaceOnUse" id="clipPath13395">
+   <rect fill-opacity="0.67" height="512" id="rect13397" width="512" x="0" y="0"/>
+  </clipPath>
+ </defs>
+ <g clip-path="url(#clipPath13395)" id="flag">
+  <rect fill="#fff" height="512" id="rect12829" style="width:0" width="512" x="0" y="0"/>
+  <rect fill="#fff" fill-rule="evenodd" height="511.84" id="rect583" stroke-width="1pt" width="699.74" x="-80" y=".15752"/>
+  <rect fill="#d72828" fill-rule="evenodd" height="221.47" id="rect561" stroke-width="1pt" width="212.94" x="-99.213" y="-23.039"/>
+  <rect fill="#d72828" fill-rule="evenodd" height="221.47" id="rect562" stroke-width="1pt" width="407.46" x="237.42" y="-23.039"/>
+  <rect fill="#d72828" fill-rule="evenodd" height="225.76" id="rect563" stroke-width="1pt" width="210" x="-99.213" y="321.67"/>
+  <rect fill="#d72828" fill-rule="evenodd" height="223.65" id="rect564" stroke-width="1pt" width="404.88" x="240" y="323.79"/>
+  <rect fill="#003897" fill-rule="evenodd" height="570.47" id="rect565" stroke-width="1pt" width="64.425" x="144.65" y="-23.039"/>
+  <rect fill="#003897" fill-rule="evenodd" height="63.444" id="rect566" stroke-width="1pt" width="768.9" x="-124.02" y="224.84"/>
+ </g>
+</svg>

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "./Services/Admin Service"
+		},
+		{
+			"path": "./User Interface"
+		},
+		{
+			"path": "./Infrastructure"
+		},
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}

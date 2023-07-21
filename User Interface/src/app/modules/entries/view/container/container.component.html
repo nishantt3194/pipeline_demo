@@ -1,0 +1,353 @@
+<div class="content-wrapper container-fluid p-0">
+  <div class="content-body">
+    <app-screen-header [icon]="'oee'" [title]="'OEE Data'">
+      <div class="card mb-0 shadow-primary" tag>
+        <div
+          class="card-body d-flex flex-column justify-content-center align-items-end"
+        >
+
+          <span class="font-medium-4">
+            <button
+              class="btn btn-secondary"
+              rippleEffect
+              (click)="routeToCreate()"
+            >  <i data-feather="edit"></i>
+              EDIT
+            </button>
+            <!-- <button
+              class="btn btn-flat-primary text-nowrap flex-grow-0 mt-1"
+              rippleEffect
+            
+              (click)="routeToCreate()"
+            >
+            
+            </button> -->
+          </span>
+        </div>
+      </div>
+    </app-screen-header>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">Shift</div>
+                    <div class="fw-bold text-dark fw-bolder">
+                      {{ ref.details.name }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">Machine</div>
+                    <div class="fw-bold text-dark fw-bolder">
+                      {{ ref.machineName }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">Area</div>
+                    <div class="fw-bold text-dark fw-bolder">
+                      {{ ref.details.area }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">Operator</div>
+                    <div class="fw-bold text-dark fw-bolder">
+                      {{ ref.operator }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">OEE</div>
+                    <div class="fw-bold text-success fw-bolder">
+                      {{ ref.oee | number : "1.2-2" }}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">
+                      Utilization Percentage
+                    </div>
+                    <div class="fw-bold text-primary fw-bolder">
+                      {{ ref.utilizationPercentage | number : "1.2-2" }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="fw-bold text-gray-500 fw-bolder">
+                      Schedule Production Time
+                    </div>
+                    <div class="fw-bold text-dark fw-bolder">
+                      {{ ref.scheduleProductionTime }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Good Production
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.goodProduction }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Total Production
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.production }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Total Rejection
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.rejection }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Rejection Percent
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.rejectionPercentage }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">Date</div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.date }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Shift Start Time
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.details.startTime }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Shift End Time
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.details.stopTime }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Value Operating Time
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.valueOperatingTime }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">
+                        Total Downtime
+                      </div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.totalDowntime }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between py-1">
+                      <div class="fw-bold text-gray-500 fw-bolder">Speed</div>
+                      <div class="fw-bold text-dark fw-bolder">
+                        {{ ref.speedFromControlPlan | number : "1.2-2" }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12 ">
+                                        <div class="d-flex justify-content-between py-1">
+                                            <div class="fw-bold text-gray-500 fw-bolder">
+                                                Downtime
+                                              </div>
+                                              <div class="fw-bold text-dark fw-bolder">
+                                                20
+                                              </div>                          
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <div class="fw-bold text-gray-500 fw-bolder">
+                                                Unplanned Downtime
+                                              </div>
+                                              <div class="fw-bold text-dark fw-bolder">
+                                                20
+                                              </div>                          
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between py-1">
+                                            <div class="fw-bold text-gray-500 fw-bolder">
+                                                Actual Speed
+                                              </div>
+                                              <div class="fw-bold text-dark fw-bolder">
+                                                17.72
+                                              </div>                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+        </div>
+        <!-- <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="w-25 fw-bold text-gray-500 fw-bolder">
+                                        Product
+                                      </div>
+                                      <div class="fw-bold text-dark fw-bolder">
+                                        {{ref.venflon}}
+                                      </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex">
+                                    <div class="w-25 fw-bold text-gray-500 fw-bolder">
+                                        Remarks
+                                      </div>
+                                      <div class="fw-bold text-dark fw-bolder">
+                                        {{ref.remarks}}
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <app-table-builder
+                                [data]="data"
+                                [headers]="headers"
+                                [mode]="'data'"
+                                
+                                ></app-table-builder>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-dark">Downtimes</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- <div class="row">
+          <div class="col-lg-12">
+            <button
+              class="btn btn-secondary"
+              rippleEffect
+              (click)="routeToCreate()"
+            >
+              EDIT
+            </button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
